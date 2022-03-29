@@ -27,9 +27,18 @@
 
             <!-- ############### VS1Lab 1a Form 1 Start -->
             <form id="tag-form" action="/tagging" method="post">
-
-                <!-- ... your code here ... -->
-
+                <fieldset>
+                    <legend>Tagging</legend>
+                    <label for="tagging_label">Tag Name:</label>
+                    <input id="tagging_label" name="label" value="HKA">
+                    <label for="latitude">Latitude:</label>
+                    <input id="latitude" name="latitude" type="number" value="12.3456">
+                    <label for="longitude">Longitude:</label>
+                    <input id="longitude" name="longitude" type="number" value="78.90123">
+                    <label for="group_tag">Group Tag:</label>
+                    <input id="group_tag" name="group_tag" value="edu">
+                    <input type="submit" value="Submit">
+                </fieldset>
             </form>
             <!-- ############### VS1Lab 1a Form 1 End -->
 
@@ -41,7 +50,18 @@
             <!-- ############### VS1Lab 1a Form 2 Start -->
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
-                <!-- ... your code here ... -->
+                <fieldset>
+                    <legend>Discovery</legend>
+                    <label for="discovery_label">Tag Name:</label>
+                    <input id="discovery_label" name="label" value="">
+                    <label for="discovery_latitude">Latitude:</label>
+                    <input id="discovery_latitude" name="latitude" type="number" step="any" value="">
+                    <label for="discovery_longitude">Longitude:</label>
+                    <input id="discovery_longitude" name="longitude" type="number" step="any" value="">
+                    <label for="discovery_group_tag">Group Tag:</label>
+                    <input id="discovery_group_tag" name="group_tag" value="">
+                    <input type="submit">
+                </fieldset>
 
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
