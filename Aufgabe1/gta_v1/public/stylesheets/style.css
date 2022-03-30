@@ -40,9 +40,6 @@ body {
   min-height: 100vh;
 }
 
-a {
-  color: var(--link-color);
-}
 
 /* ### TODO ### Styles for other HTML elements */
 
@@ -111,6 +108,14 @@ a {
 
 /* ... your code here ... */
 
+.header {
+  background-color: var(--background-color);
+  color: var(--gray-color);
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
 
 /* ### TODO ### Styles for Main Component */
 
@@ -128,10 +133,21 @@ a {
 
 
 /* ### TODO ### Styles for Footer Component */
+.footer {
+  /* make a footer at the bottom of the page in gray color */
+  background-color: var(--background-color);
+  color: var(--gray-color);
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 
-/* ... your code here ... */
+
+}
 
 
 /* ### TODO ### Media Queries */
+.header__image {
 
+}
 /* ... your code here ... */
