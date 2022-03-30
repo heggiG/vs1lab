@@ -1,4 +1,3 @@
-
 /*
   File origin: VS1LAB A1b  
 
@@ -29,20 +28,6 @@ html {
   --background-color: #efefef;
   --border-color: #cdcdcd;
   --gray-color: #666;
-
-  --default-margin: 0.5em;
-  --top-margin: var(--default-margin);
-  --bottom-margin: var(--default-margin);
-
-  --normal-padding: 1em;
-  --half-padding: calc(var(--normal-padding)/2);
-  --quater-padding: calc(var(--normal-padding)/4);
-  --double-padding: calc(var(--normal-padding)*2);
-
-  
-  --border-width: 1px;
-  --border-radius: 2px;
-  --border-style: solid;
 }
 
 
@@ -55,39 +40,10 @@ body {
   min-height: 100vh;
 }
 
-a {
-  color: var(--link-color);
-}
 
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
-input {
-  display: block;
-}
-
-fieldset {
-  border-style: var(--border-style);
-  border-color: var(--border-color);
-  border-width: var(--border-width);
-  border-radius: var(--border-radius);
-}
-
-.fit-content {
-  width: 100%;
-  margin-top: var(--top-margin);
-  margin-bottom: var(--bottom-margin);
-  padding: var(--quater-padding);
-}
-
-input.hiddenInput {
-  display: none;
-}
-
-input[type=submit] {
-  background-color: var(--background-color);
-  border-style: var(--border-style);
-}
 
 
 /* Grid styles (no changes required) */
@@ -149,121 +105,49 @@ input[type=submit] {
 
 
 /* ### TODO ### Styles for Header Component */
-header {
-  display: flex;
-  background-color: var(--background-color);
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--double-padding);
-}
-
-header img {
-  max-width: 3em;
-}
 
 /* ... your code here ... */
 
+.header {
+  background-color: var(--background-color);
+  color: var(--gray-color);
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
 
 /* ### TODO ### Styles for Main Component */
-main {
-  padding: var(--normal-padding);
-}
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Tagging component */
-form#tag-form {
-  width: 100%;
-}
-
-fieldset#fs_addGeoTag {
-  margin-top: var(--top-margin);
-  width: 100%;
-  display: block;
-  padding: var(--half-padding);
-}
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Discovery component */
 
-div.discovery__wrapper {
-  margin-top: var(--top-margin);
-  display: flexbox;
-}
-
-fieldset#fs_search {
-  padding-left: var(--half-padding);
-  padding-right: var(--half-padding);
-}
-
-fieldset#fs_search .spread {
-  margin-top: var(--top-margin);
-  margin-bottom: var(--bottom-margin);
-}
-
-div#groupElements {
-  width: fit-content;
-}
-
-ul#discoveryResults {
-  list-style-type: none;
-}
-
-ul.discovery__results li {
-  margin-bottom: var(--bottom-margin);
-  border-style: var(--border-style);
-  border-color: var(--border-color);
-  border-radius: var(--border-radius);
-  border-width: var(--border-width);
-  padding: var(--half-padding);
-  background-color: var(--background-color);
-  color: var(--link-color);
-}
-
-img#mapView {
-  display: block;
-}
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Footer Component */
-
-/* ... your code here ... */
-footer{
-  display: flex;
+.footer {
+  /* make a footer at the bottom of the page in gray color */
   background-color: var(--background-color);
-  padding: var(--double-padding);
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: flex-start;
+  color: var(--gray-color);
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+
 }
 
 
 /* ### TODO ### Media Queries */
+.header__image {
 
-/* ... your code here ... */
-
-@media (max-width: 850px) {
-  .row {
-    flex-direction: column;
-  }
-
-  .col-3 {
-    width: 100%;
-  }
-
-  .col-9 {
-    width: 100%;
-  }
-
-  header img {
-    width: 100%;
-  }
-
-  section {
-    padding-bottom: var(--double-padding);
-  }
 }
+/* ... your code here ... */
