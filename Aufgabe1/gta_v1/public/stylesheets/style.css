@@ -47,6 +47,10 @@ a {
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
+input {
+  display: block;
+}
+
 
 
 /* Grid styles (no changes required) */
@@ -108,11 +112,25 @@ a {
 
 
 /* ### TODO ### Styles for Header Component */
+header {
+  display: flex;
+  background-color: var(--background-color);
+}
+header img {
+  max-width: 20%;
+}
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Main Component */
+/*main {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 5px; 
+  margin: 10px;
+}*/
+
 
 /* ... your code here ... */
 
@@ -123,7 +141,9 @@ a {
 
 
 /* ### TODO ### Styles for Discovery component */
-
+div.discovery__wrapper {
+  display: flexbox;
+}
 /* ... your code here ... */
 
 
