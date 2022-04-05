@@ -55,7 +55,7 @@ body {
   flex: 1;
 }
 
-.col-1 {
+.col-1 .tagging {
   width: calc(8.33% - 1rem);
 }
 
@@ -114,11 +114,12 @@ body {
   background-color: var(--background-color);
   border-bottom: 1px solid var(--border-color);
   padding: 1rem;
+  min-height: 3rem;
 }
 
 .header__image {
-  width: 5%;
-  height: 5%;
+  width: 3%;
+  height: 3%;
 }
 
 /* ### TODO ### Styles for Main Component */
@@ -134,18 +135,87 @@ body {
 .tagging {
   padding: 1rem;
   margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__tagging {
+  display: flex;
+  flex-direction: column;
+  max-width: 16.66%;
+}
+
+.tagging fieldset {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.tagging legend {
+  font-weight: bold;
+}
+
+
+.tagging input {
+  padding: 5px;
+  margin: 5px;
 }
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Discovery component */
 .discovery {
-  display: grid;
-
+  display: flex;
+  flex-direction: column;
+  width: auto;
   padding: 1rem;
   margin: 5px;
 }
-/* ... your code here ... */
+
+.discovery fieldset {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.discovery legend {
+  font-weight: bold;
+}
+
+.discovery input {
+  padding: 5px;
+  margin: 5px;
+  max-width: 50%;
+}
+
+.discovery__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.discovery__taglist {
+  display: flex;
+  flex-direction: column;
+}
+
+.discovery__results li {
+  padding: 5px;
+  margin: 5px 5px 5px 0;
+  background: var(--background-color);
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.discovery__map {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: auto;
+  height: auto;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
@@ -154,7 +224,6 @@ body {
   background-color: var(--background-color);
   border-top: 1px solid var(--border-color);
   margin-top: auto;
-  /* make text bold */
   font-weight: bold;
   display: flex;
   flex-direction: row;
