@@ -30,6 +30,16 @@ html {
   --border-color: #cdcdcd;
   --gray-color: #666;
 
+  --default-margin: 0.5em;
+  --top-margin: var(--default-margin);
+  --bottom-margin: var(--default-margin);
+
+  --normal-padding: 1em;
+  --half-padding: calc(var(--normal-padding)/2);
+  --quater-padding: calc(var(--normal-padding)/4);
+  --double-padding: calc(var(--normal-padding)*2);
+
+  
   --border-width: 1px;
   --border-radius: 2px;
   --border-style: solid;
@@ -63,16 +73,20 @@ fieldset {
   border-radius: var(--border-radius);
 }
 
-button {
-  background-color: var(--background-color);
+.fit-content {
+  width: 100%;
+  margin-top: var(--top-margin);
+  margin-bottom: var(--bottom-margin);
+  padding: var(--quater-padding);
 }
 
-.fit-content {
-  /*width: inherit;*/
-  width: 100%;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  padding: 0.25em;
+input.hiddenInput {
+  display: none;
+}
+
+input[type=submit] {
+  background-color: var(--background-color);
+  border-style: var(--border-style);
 }
 
 
@@ -140,8 +154,9 @@ header {
   background-color: var(--background-color);
   justify-content: space-between;
   align-items: center;
-  padding: 2em;
+  padding: var(--double-padding);
 }
+
 header img {
   max-width: 3em;
 }
@@ -150,37 +165,24 @@ header img {
 
 
 /* ### TODO ### Styles for Main Component */
-/*main {
-  display: grid;
-  grid-template-columns: 25% 75%;
-  gap: 5px; 
-  margin: 10px;
-}*/
 main {
-  /*margin: 1em;*/
-  padding: 1em;
+  padding: var(--normal-padding);
 }
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Tagging component */
-form.tag-form {
+form#tag-form {
   width: 100%;
 }
 
 fieldset#fs_addGeoTag {
-  margin-top: 0.5em;
+  margin-top: var(--top-margin);
   width: 100%;
   display: block;
-  padding: 0.5em;
+  padding: var(--half-padding);
 }
-
-fieldset#fs_addGeoTag input[type=submit] {
-  background-color: var(--background-color);
-  border-style: var(--border-style);
-}
-
 
 /* ... your code here ... */
 
@@ -188,47 +190,40 @@ fieldset#fs_addGeoTag input[type=submit] {
 /* ### TODO ### Styles for Discovery component */
 
 div.discovery__wrapper {
-  margin-top: 0.5em;
+  margin-top: var(--top-margin);
   display: flexbox;
 }
 
 fieldset#fs_search {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: var(--half-padding);
+  padding-right: var(--half-padding);
 }
 
 fieldset#fs_search .spread {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: var(--top-margin);
+  margin-bottom: var(--bottom-margin);
 }
 
 div#groupElements {
   width: fit-content;
 }
 
-input#inp_hiddenLongitude {
-  display: none;
-}
-input#inp_hiddenLatitude {
-  display: none;
-}
-
-.discovery__results {
+ul#discoveryResults {
   list-style-type: none;
 }
 
 ul.discovery__results li {
-  margin-bottom: 0.5em;
+  margin-bottom: var(--bottom-margin);
   border-style: var(--border-style);
   border-color: var(--border-color);
   border-radius: var(--border-radius);
   border-width: var(--border-width);
-  padding: 0.5em;
+  padding: var(--half-padding);
   background-color: var(--background-color);
   color: var(--link-color);
 }
 
-#mapView {
+img#mapView {
   display: block;
 }
 /* ... your code here ... */
@@ -240,7 +235,7 @@ ul.discovery__results li {
 footer{
   display: flex;
   background-color: var(--background-color);
-  padding: 2em;
+  padding: var(--double-padding);
   justify-content: space-around;
   flex-direction: column;
   align-items: flex-start;
@@ -266,5 +261,9 @@ footer{
 
   header img {
     width: 100%;
+  }
+
+  section {
+    padding-bottom: var(--double-padding);
   }
 }
