@@ -8,13 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoTagApp</title>
-    <link rel="stylesheet" href="./stylesheets/style.css" />
+    <link rel="stylesheet" href="./stylesheets/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 <header class="header">
-    <img src="./images/location.png" class="header__image" alt="an image of a map and location" >
+    <img src="./images/location.png" class="header__image" alt="an image of a map and location">
     <h1 class="header__title">GeoTagApp</h1>
     <nav class="header__navigation">
         <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
@@ -22,19 +22,21 @@
 </header>
 
 <main class="main row">
-    <section class="main__tagging tagging row col-1">
+    <section class="main__tagging tagging">
         <h2>Tagging</h2>
 
         <!-- ############### VS1Lab 1a Form 1 Start -->
-        <form id="tag-form" class="col-1 col-2" action="/tagging" method="post">
+        <form id="tag-form" class="" action="/tagging" method="post">
             <fieldset class="tagging_fieldset">
                 <legend>Add a new GeoTag</legend>
 
                 <label for="latitude">Latitude:</label>
-                <input id="latitude" name="latitude" type="number" value="" placeholder="12.3456" required pattern="\d{2}\.\d{5}">
+                <input id="latitude" name="latitude" type="number" value="" placeholder="12.3456" required
+                       pattern="\d{2}\.\d{5}">
 
                 <label for="longitude">Longitude:</label>
-                <input id="longitude" name="longitude" type="number" value="" placeholder="78.9012" required pattern="\d{2}\.\d{5}">
+                <input id="longitude" name="longitude" type="number" value="" placeholder="78.9012" required
+                       pattern="\d{2}\.\d{5}">
 
                 <label for="name">Name:</label>
                 <input id="name" name="name" value="" placeholder="HKA" required>
@@ -49,19 +51,20 @@
 
     </section>
 
-    <section class="main__discovery discovery row col-3">
+    <section class="main__discovery discovery row">
         <h2 class="discovery__title">Discovery</h2>
 
         <!-- ############### VS1Lab 1a Form 2 Start -->
-        <form class="discovery__search col-12" id="discoveryFilterForm" action="/discovery" method="post">
+        <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
-            <fieldset class="discovery_fieldset col-3">
+            <fieldset class="discovery_fieldset">
                 <legend>Search</legend>
                 <input id="searchterm" hidden name="searchterm" value="" placeholder="HKA" required>
 
                 <input id="discovery_latitude" hidden name="latitude" type="number" value="" placeholder="12.3456">
 
-                <input id="discovery_longitude" hidden name="longitude" type="number" step="any" value="" placeholder="78.9012">
+                <input id="discovery_longitude" hidden name="longitude" type="number" step="any" value=""
+                       placeholder="78.9012">
 
                 <label for="discovery_hashtag">Search term or keyword:</label>
                 <input id="discovery_hashtag" name="discovery_hashtag" value="" placeholder="e.g. #edu">
@@ -81,7 +84,7 @@
             </div>
 
             <div class="discovery__map col-5">
-                <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
                 <span>Result map</span>
             </div>
         </div>
