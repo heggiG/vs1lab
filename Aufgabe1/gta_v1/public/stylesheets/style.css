@@ -259,6 +259,25 @@ body {
     align-items: baseline;
     justify-content: center;
   }
+
+  .tagging {
+    padding: 1rem;
+    margin: 5px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+  }
+
+  .tagging fieldset {
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    align-items: baseline;
+  }
 }
 
 
