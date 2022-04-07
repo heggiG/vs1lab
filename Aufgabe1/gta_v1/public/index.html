@@ -21,7 +21,7 @@
         </nav>
     </header>
 
-<main class="main row">
+    <main class="main row">
         <section class="main__tagging tagging col-3">
             <h2>Tagging</h2>
 
@@ -32,19 +32,19 @@
                 <fieldset id="fs_addGeoTag" >
                     <legend id="lgnd_addGeoTag">Add a new GeoTag</legend>
 
-                    <label id="lbl_latitude" for="inp_latitude">Latitude:</label>
-                    <input type="number" id="inp_latitude" name="latitude" disabled/>
+                    <label id="lbl_latitude" for="inp_latitude" class="fit-content">Latitude:</label>
+                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" disabled/>
 
-                    <label id="lbl_longitude" for="inp_longitude">Longitude:</label>
-                    <input type="number" id="inp_longitude" name="longitude" disabled/>
+                    <label id="lbl_longitude" for="inp_longitude" class="fit-content">Longitude:</label>
+                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" disabled/>
 
-                    <label id="lbl_tagName" for="inp_tagName">Name:</label>
-                    <input type="test" id="inp_tagName" name="name" required placeholder="e.g. Central Berlin" pattern="[a-zA-Z 0-9]+" title="only alphqnumerical characters or spaces, with a mx length of 10 characters" maxlength="10"/>
+                    <label id="lbl_tagName" for="inp_name" class="fit-content">Name:</label>
+                    <input type="test" id="inp_name" name="name" class="fit-content" required placeholder="e.g. Central Berlin" pattern="[a-zA-Z 0-9]+" title="only alphqnumerical characters or spaces, with a mx length of 10 characters" maxlength="10"/>
 
-                    <label id="lbl_hashtag" for="inp_hashtag">Hashtag:</label>
-                    <input type="text" id="inp_hashtag" name="hashtag" placeholder="e.g. #ber" pattern="#[a-zA-Z]+" title="hashtags start with a '#' followed by up to 10 letters" maxlength="11"/>
+                    <label id="lbl_hashtag" for="inp_hashtag" class="fit-content">Hashtag:</label>
+                    <input type="text" id="inp_hashtag" name="hashtag" class="fit-content" placeholder="e.g. #ber" pattern="#[a-zA-Z]+" title="hashtags start with a '#' followed by up to 10 letters" maxlength="11"/>
 
-                    <input type="submit" id="sbmtbtn_addTag" value="Add Tag"/>
+                    <input type="submit" id="sbmtbtn_addTag" class="fit-content" value="Add Tag"/>
                 </fieldset>
 
             </form>
@@ -59,28 +59,33 @@
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
                 <!-- ... your code here ... -->
-                    <fieldset>
-                        <legend id="lgnd_search">Serach</legend>
+                    <fieldset id="fs_search">
+                        <legend id="lgnd_search" class="spread">Serach</legend>
 
-                        <label id="lbl_query" for="inp_query">Search term or keyword:</label>
-                        <input type="search" id="inp_query" name ="query" placeholder="e.g. Berlin">
+                        <div id="groupElements">
+                            <label id="lbl_query" for="inp_searchterm" class="spread fit-content">Search term or keyword:</label>
+                            <input type="search" id="inp_searchterm" class="spread fit-content" name ="query" placeholder="e.g. Berlin">
+
+                            <input type="text" id="inp_hiddenLongitude"/>
+                            <input type="text" id="inp_hiddenLatitude"/>
                         
-                        <input type="submit" id="sbmtbtn_search" value="Search" />
+                            <input type="submit" id="sbmtbtn_search" class="spread fit-content" value="Search" />
+                        </div>
                     </fieldset>
 
 
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
 
-            <div class="discovery__wrapper">
-                <div class="discovery__taglist">
+            <div class="discovery__wrapper row">
+                <div class="discovery__taglist col-3">
                     <ul class="discovery__results" id="discoveryResults">
                         <li>Castle (49.01379, 8.404435) #sight</li>
                         <li>IWI (49.01379, 8.390071) #edu</li>
                     </ul>
                 </div>
 
-                <div class="discovery__map">
+                <div class="discovery__map col-9">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
                     <span>Result map</span>
                 </div>

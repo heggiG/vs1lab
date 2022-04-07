@@ -1,3 +1,4 @@
+
 /*
   File origin: VS1LAB A1b  
 
@@ -28,6 +29,10 @@ html {
   --background-color: #efefef;
   --border-color: #cdcdcd;
   --gray-color: #666;
+
+  --border-width: 1px;
+  --border-radius: 2px;
+  --border-style: solid;
 }
 
 
@@ -51,6 +56,24 @@ input {
   display: block;
 }
 
+fieldset {
+  border-style: var(--border-style);
+  border-color: var(--border-color);
+  border-width: var(--border-width);
+  border-radius: var(--border-radius);
+}
+
+button {
+  background-color: var(--background-color);
+}
+
+.fit-content {
+  /*width: inherit;*/
+  width: 100%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.25em;
+}
 
 
 /* Grid styles (no changes required) */
@@ -115,9 +138,12 @@ input {
 header {
   display: flex;
   background-color: var(--background-color);
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
 }
 header img {
-  max-width: 20%;
+  max-width: 3em;
 }
 
 /* ... your code here ... */
@@ -130,19 +156,80 @@ header img {
   gap: 5px; 
   margin: 10px;
 }*/
-
+main {
+  /*margin: 1em;*/
+  padding: 1em;
+}
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Tagging component */
+form.tag-form {
+  width: 100%;
+}
+
+fieldset#fs_addGeoTag {
+  margin-top: 0.5em;
+  width: 100%;
+  display: block;
+  padding: 0.5em;
+}
+
+fieldset#fs_addGeoTag input[type=submit] {
+  background-color: var(--background-color);
+  border-style: var(--border-style);
+}
+
 
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Discovery component */
+
 div.discovery__wrapper {
+  margin-top: 0.5em;
   display: flexbox;
+}
+
+fieldset#fs_search {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+fieldset#fs_search .spread {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+div#groupElements {
+  width: fit-content;
+}
+
+input#inp_hiddenLongitude {
+  display: none;
+}
+input#inp_hiddenLatitude {
+  display: none;
+}
+
+.discovery__results {
+  list-style-type: none;
+}
+
+ul.discovery__results li {
+  margin-bottom: 0.5em;
+  border-style: var(--border-style);
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  padding: 0.5em;
+  background-color: var(--background-color);
+  color: var(--link-color);
+}
+
+#mapView {
+  display: block;
 }
 /* ... your code here ... */
 
@@ -150,8 +237,34 @@ div.discovery__wrapper {
 /* ### TODO ### Styles for Footer Component */
 
 /* ... your code here ... */
+footer{
+  display: flex;
+  background-color: var(--background-color);
+  padding: 2em;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 
 /* ### TODO ### Media Queries */
 
 /* ... your code here ... */
+
+@media (max-width: 850px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .col-3 {
+    width: 100%;
+  }
+
+  .col-9 {
+    width: 100%;
+  }
+
+  header img {
+    width: 100%;
+  }
+}
