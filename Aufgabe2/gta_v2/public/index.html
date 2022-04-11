@@ -8,100 +8,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoTagApp</title>
-    <link rel="stylesheet" href="./stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <header class="header">
-        <img src="./images/location.png" class="header__image" alt="an image of a map and location">
-        <h1 class="header__title">GeoTagApp</h1>
-        <nav class="header__navigation">
-            <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
-        </nav>
-    </header>
+<header class="header">
+    <img src="../../../Aufgabe1/gta_v1/public/images/location.png" class="header__image" alt="an image of a map and location">
+    <h1 class="header__title">GeoTagApp</h1>
+    <nav class="header__navigation">
+        <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
+    </nav>
+</header>
 
-    <main class="main row">
-        <section class="main__tagging tagging col-3">
-            <h2>Tagging</h2>
+<main class="main row">
+    <section class="main__tagging tagging col-4">
+        <h2>Tagging</h2>
 
-            <!-- ############### VS1Lab 1a Form 1 Start -->
-            <form id="tag-form" action="/tagging" method="post">
+        <!-- ############### VS1Lab 1a Form 1 Start -->
+        <form id="tag-form" class="" action="/tagging" method="post">
+            <fieldset class="tagging_fieldset">
+                <legend>Add a new GeoTag</legend>
 
-                <!-- ... your code here ... -->
-                <fieldset id="fs_addGeoTag" >
-                    <legend id="lgnd_addGeoTag">Add a new GeoTag</legend>
+                <label for="latitude">Latitude:</label>
+                <input id="latitude" name="latitude" type="number" value="" placeholder="12.3456" required
+                       pattern="\d{2}\.\d{5}">
 
-                    <label id="lbl_latitude" for="inp_latitude" class="fit-content">Latitude:</label>
-                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" disabled/>
+                <label for="longitude">Longitude:</label>
+                <input id="longitude" name="longitude" type="number" value="" placeholder="78.9012" required
+                       pattern="\d{2}\.\d{5}">
 
-                    <label id="lbl_longitude" for="inp_longitude" class="fit-content">Longitude:</label>
-                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" disabled/>
+                <label for="name">Name:</label>
+                <input id="name" name="name" value="" placeholder="HKA" required>
 
-                    <label id="lbl_tagName" for="inp_name" class="fit-content">Name:</label>
-                    <input type="text" id="inp_name" name="name" class="fit-content" required placeholder="e.g. Central Berlin" pattern="[a-zA-Z 0-9]+" title="only alphqnumerical characters or spaces, with a mx length of 10 characters" maxlength="10"/>
+                <label for="hashtag">Hashtag:</label>
+                <input id="hashtag" name="hashtag" value="" pattern="#([A-Za-z]){1,10}" placeholder="#edu">
 
-                    <label id="lbl_hashtag" for="inp_hashtag" class="fit-content">Hashtag:</label>
-                    <input type="text" id="inp_hashtag" name="hashtag" class="fit-content" placeholder="e.g. #ber" pattern="#[a-zA-Z]+" title="hashtags start with a '#' followed by up to 10 letters" maxlength="11"/>
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+        <!-- ############### VS1Lab 1a Form 1 End -->
 
-                    <input type="submit" id="sbmtbtn_addTag" class="fit-content" value="Add Tag"/>
-                </fieldset>
+    </section>
 
-            </form>
-            <!-- ############### VS1Lab 1a Form 1 End -->
+    <section class="main__discovery discovery col-8">
+        <h2 class="discovery__title">Discovery</h2>
 
-        </section>
+        <!-- ############### VS1Lab 1a Form 2 Start -->
+        <form class="discovery__search col-4" id="discoveryFilterForm" action="/discovery" method="post">
 
-        <section class="main__discovery discovery col-9">
-            <h2 class="discovery__title">Discovery</h2>
+            <fieldset class="discovery_fieldset">
+                <legend>Search</legend>
+                <input id="searchterm" hidden name="searchterm" value="" placeholder="HKA" required>
 
-            <!-- ############### VS1Lab 1a Form 2 Start -->
-            <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
+                <input id="discovery_latitude" hidden name="latitude" type="number" value="" placeholder="12.3456">
 
-                <!-- ... your code here ... -->
-                    <fieldset id="fs_search">
-                        <legend id="lgnd_search" class="spread">Search</legend>
+                <input id="discovery_longitude" hidden name="longitude" type="number" step="any" value=""
+                       placeholder="78.9012">
 
-                        <div id="groupElements">
-                            <label id="lbl_query" for="inp_searchterm" class="fit-content">Search term or keyword:</label>
-                            <input type="search" id="inp_searchterm" class="fit-content" name ="query" placeholder="e.g. Berlin">
+                <label for="discovery_hashtag">Search term or keyword:</label>
+                <input id="discovery_hashtag" name="discovery_hashtag" value="" placeholder="e.g. #edu">
 
-                            <input type="text" id="inp_hiddenLongitude" class="hiddenInput"/>
-                            <input type="text" id="inp_hiddenLatitude" class="hiddenInput"/>
-                        
-                            <input type="submit" id="sbmtbtn_search" class="fit-content" value="Search" />
-                        </div>
-                    </fieldset>
+                <input type="submit" value="Search">
+            </fieldset>
 
+        </form>
+        <!-- ############### VS1Lab 1a Form 2 End -->
 
-            </form>
-            <!-- ############### VS1Lab 1a Form 2 End -->
-
-            <div class="discovery__wrapper row">
-                <div class="discovery__taglist col-3">
-                    <ul class="discovery__results" id="discoveryResults">
-                        <li>Castle (49.01379, 8.404435) #sight</li>
-                        <li>IWI (49.01379, 8.390071) #edu</li>
-                    </ul>
-                </div>
-
-                <div class="discovery__map col-9">
-                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
-                    <span>Result map</span>
-                </div>
+        <div class="discovery__wrapper row">
+            <div class="discovery__taglist col-6">
+                <ul class="discovery__results col-12" style="list-style: none" id="discoveryResults">
+                    <li>Castle (49.01379, 8.404435) #sight</li>
+                    <li>IWI (49.01379, 8.390071) #edu</li>
+                </ul>
             </div>
-        </section>
 
-    </main>
+            <div class="discovery__map col-6">
+                <img src="../../../Aufgabe1/gta_v1/public/images/mapview.jpg" alt="a map with locations" id="mapView"/>
+                <span>Result map</span>
+            </div>
+        </div>
+    </section>
 
-    <footer class="footer">
-        <span>(c) 2021/22 HKA_IWI_VSYS</span>
-    </footer>
-    
-    <!-- Load JavaScripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./javascripts/geotagging.js"></script>
+</main>
+
+<footer class="footer">
+    <span>(c) 2021/22 HKA_IWI_VSYS</span>
+</footer>
 </body>
 
 </html>

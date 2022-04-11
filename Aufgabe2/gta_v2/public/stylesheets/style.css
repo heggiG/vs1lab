@@ -1,4 +1,3 @@
-
 /*
   File origin: VS1LAB A1b  
 
@@ -11,6 +10,7 @@
 
 html {
   box-sizing: border-box;
+  width: 100%;
 }
 
 * {
@@ -29,20 +29,6 @@ html {
   --background-color: #efefef;
   --border-color: #cdcdcd;
   --gray-color: #666;
-
-  --default-margin: 0.5em;
-  --top-margin: var(--default-margin);
-  --bottom-margin: var(--default-margin);
-
-  --normal-padding: 1em;
-  --half-padding: calc(var(--normal-padding)/2);
-  --quater-padding: calc(var(--normal-padding)/4);
-  --double-padding: calc(var(--normal-padding)*2);
-
-  
-  --border-width: 1px;
-  --border-radius: 2px;
-  --border-style: solid;
 }
 
 
@@ -53,41 +39,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-a {
-  color: var(--link-color);
-}
 
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
-input {
-  display: block;
-}
-
-fieldset {
-  border-style: var(--border-style);
-  border-color: var(--border-color);
-  border-width: var(--border-width);
-  border-radius: var(--border-radius);
-}
-
-.fit-content {
-  width: 100%;
-  margin-top: var(--top-margin);
-  margin-bottom: var(--bottom-margin);
-  padding: var(--quater-padding);
-}
-
-input.hiddenInput {
-  display: none;
-}
-
-input[type=submit] {
-  background-color: var(--background-color);
-  border-style: var(--border-style);
-}
 
 
 /* Grid styles (no changes required) */
@@ -149,121 +108,157 @@ input[type=submit] {
 
 
 /* ### TODO ### Styles for Header Component */
-header {
+
+.header {
   display: flex;
-  background-color: var(--background-color);
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: var(--double-padding);
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  min-height: 3rem;
 }
 
-header img {
-  max-width: 3em;
+.header__image {
+  min-height: 50px;
+  min-width: 50px;
+  width: 3%;
+  height: 3%;
 }
-
-/* ... your code here ... */
-
 
 /* ### TODO ### Styles for Main Component */
-main {
-  padding: var(--normal-padding);
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
 }
-
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Tagging component */
-form#tag-form {
-  width: 100%;
+.tagging {
+  padding: 1rem;
+  margin: 5px;
+  display: flex;
+  flex-flow: column wrap;
+  column-gap: 10px;
+  justify-content: left;
+}
+.tagging h2 {
+  margin-left: 1rem;
 }
 
-fieldset#fs_addGeoTag {
-  margin-top: var(--top-margin);
-  width: 100%;
-  display: block;
-  padding: var(--half-padding);
+.tagging fieldset {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
+.tagging legend {
+  font-weight: bold;
+}
+
+
+.tagging input {
+  padding: 5px;
+  margin: 5px;
+}
 /* ... your code here ... */
 
 
 /* ### TODO ### Styles for Discovery component */
-
-div.discovery__wrapper {
-  margin-top: var(--top-margin);
-  display: flexbox;
+.discovery {
+  padding: 1rem;
+  margin: 5px;
 }
 
-fieldset#fs_search {
-  padding-left: var(--half-padding);
-  padding-right: var(--half-padding);
+.discovery__search {
+  padding: 5px 5px 5px 0;
+  width: 100%;
 }
 
-fieldset#fs_search .spread {
-  margin-top: var(--top-margin);
-  margin-bottom: var(--bottom-margin);
+.discovery fieldset {
+  padding: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-div#groupElements {
-  width: fit-content;
+.discovery legend {
+  font-weight: bold;
 }
 
-ul#discoveryResults {
-  list-style-type: none;
+.discovery input {
+  padding: 5px;
+  margin: 5px;
 }
 
-ul.discovery__results li {
-  margin-bottom: var(--bottom-margin);
-  border-style: var(--border-style);
-  border-color: var(--border-color);
-  border-radius: var(--border-radius);
-  border-width: var(--border-width);
-  padding: var(--half-padding);
-  background-color: var(--background-color);
-  color: var(--link-color);
+.discovery__results li {
+  margin: 5px 5px 5px 1px;
+  background: var(--background-color);
+  padding: 1rem;
+  border: 1px solid var(--border-color);
 }
 
-img#mapView {
-  display: block;
+.discovery__map {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: auto;
+  height: auto;
 }
-/* ... your code here ... */
 
 
 /* ### TODO ### Styles for Footer Component */
-
-/* ... your code here ... */
-footer{
-  display: flex;
+.footer {
+  min-height: 5rem;
   background-color: var(--background-color);
-  padding: var(--double-padding);
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: flex-start;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
-
-@media (max-width: 850px) {
-  .row {
+@media screen and (max-width: 930px) {
+  .main {
+    display: flex;
     flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
   }
 
-  .col-3 {
-    width: 100%;
+  .tagging {
+    padding: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
   }
 
-  .col-9 {
-    width: 100%;
+  .tagging h2 {
+    margin-left: 0;
   }
 
-  header img {
-    width: 100%;
-  }
-
-  section {
-    padding-bottom: var(--double-padding);
+  .tagging fieldset {
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    align-items: baseline;
   }
 }
+
+
+/* ... your code here ... */
