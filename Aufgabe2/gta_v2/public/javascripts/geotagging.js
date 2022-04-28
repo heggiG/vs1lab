@@ -87,10 +87,10 @@ class MapManager {
             return "images/mapview.jpg";
         }
 
-        let tagList = `${latitude},${longitude}|marker-start`;
-        tagList += tags.reduce((acc, tag) => `${acc}||${tag.latitude},${tag.longitude}|flag-${tag.name}`, "");
+        let tagList = `You,${latitude},${longitude}`;
+        tagList += tags.reduce((acc, tag) => `${acc}|${tag.name},${tag.latitude},${tag.longitude}`, "");
 
-        const mapQuestUrl = `https://www.mapquestapi.com/staticmap/v5/map?key=${this.#apiKey}&size=600,400&zoom=${zoom}&center=${latitude},${longitude}&locations=${tagList}`;
+        const mapQuestUrl = `https://www.mapquestapi.com/staticmap/v4/getmap?key=${this.#apiKey}&size=600,400&zoom=${zoom}&center=${latitude},${longitude}&pois=${tagList}`;
         console.log("Generated MapQuest URL:", mapQuestUrl);
 
         return mapQuestUrl;
@@ -102,29 +102,20 @@ class MapManager {
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-// ... your code here ...
-function callbackFunction(helper){
-    const latitude = helper.latitude;
-    const longitude = helper.longitude;
-    document.getElementById("inp_latitude" ).value = latitude;
-    document.getElementById("inp_longitude").value = longitude;
+function updateLocation(mapManager) {
+    // Get the current location.
+    LocationHelper.findLocation((location) => {
+        // Update the location in the page.
+        document.getElementById("discoveryResults").innerHTML += `<li>Standort (${location.latitude}, ${location.longitude}) #standard</li>`;
 
-    document.getElementById("inp_hiddenLatitude").value = latitude;
-    document.getElementById("inp_hiddenLongitude" ).value = longitude;
+        // Get the current map image.
 
-    manager = new MapManager ("i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA");
-    var url = manager.getMapUrl(latitude, longitude);
-    
-    document.getElementById("mapView").src = url;
-   
+        const mapUrl = mapManager.getMapUrl(location.latitude, location.longitude);
+        document.getElementById("mapView").src = mapUrl;
+    });
 }
-
-function updateLocation(){
-    LocationHelper.findLocation(callbackFunction);
-}
-
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    //alert("Please change the script 'geotagging.js'");
-    updateLocation();
+    const mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
+    updateLocation(mapManager);
 });
