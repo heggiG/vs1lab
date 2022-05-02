@@ -106,10 +106,14 @@ function updateLocation(mapManager) {
     // Get the current location.
     LocationHelper.findLocation((location) => {
         // Update the location in the page.
-        document.getElementById("discoveryResults").innerHTML += `<li>Standort (${location.latitude}, ${location.longitude}) #standard</li>`;
+        let form = document.getElementById("tag_form")
+        form.latitude.value = location.latitude;
+        form.longitude.value = location.longitude;
+        let discoverForm = document.getElementById("discovery_form")
+        discoverForm.latitude.value = location.latitude;
+        discoverForm.longitude.value = location.longitude;
 
         // Get the current map image.
-
         const mapUrl = mapManager.getMapUrl(location.latitude, location.longitude);
         document.getElementById("mapView").src = mapUrl;
     });
