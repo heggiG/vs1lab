@@ -109,8 +109,8 @@ function callbackFunction(helper){
     document.getElementById("inp_latitude" ).value = latitude;
     document.getElementById("inp_longitude").value = longitude;
 
-    document.getElementById("inp_hiddenLatitude").attribute = latitude;
-    document.getElementById("inp_hiddenLongitude" ).attribute = longitude;
+    document.getElementById("inp_hiddenLatitude").value = latitude;
+    document.getElementById("inp_hiddenLongitude" ).value = longitude;
 
     manager = new MapManager ("i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA");
     var url = manager.getMapUrl(latitude, longitude);
