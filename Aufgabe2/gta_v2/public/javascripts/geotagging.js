@@ -97,6 +97,10 @@ class MapManager {
     }
 }
 
+function changeValueOfInput(id, value) {
+    document.getElementById(id).value = value;
+}
+
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
@@ -105,57 +109,21 @@ class MapManager {
 // ... your code here ...
 function updateLocation() {
     LocationHelper.findLocation((callback) => {
-        var latitude = callback.latitude;
-        var longitude = callback.longitude;
+        changeValueOfInput("inp_latitude", callback.latitude);
+        changeValueOfInput("inp_longitude", callback.longitude);
 
-        var inp_longitude = document.getElementById("inp_longitude");
-        inp_longitude.value = longitude;
+        changeValueOfInput("inp_hiddenLongitude", callback.longitude);
+        changeValueOfInput("inp_hiddenLatitude", callback.latitude);
+        
+        let mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
+        let img_map = document.getElementById("img_map"); 
 
-        var inp_latitude = document.getElementById("inp_latitude");
-        inp_latitude.value = latitude;
-
-
-        var inp_hiddenlongitude = document.getElementById("inp_hiddenLongitude");
-        inp_hiddenlongitude.value = longitude;
-
-        var inp_hiddenlatitude = document.getElementById("inp_hiddenLatitude");
-        inp_hiddenlatitude.value = latitude;
-
-        var mapManager = new MapManager('i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA');
-        var img_map = document.getElementById("img_map"); 
-
-        img_map.src = mapManager.getMapUrl(latitude, longitude);
-    });
-}
-
-/**
- * 
- * @param {string} id 
- * @param {int} value 
- */
-function fillInputField(id, value) {
-    document.getElementById(id).value = value;
-}
-
-function updateLocation2() {
-    LocationHelper.findLocation((callback) => {
-        var latitude = callback.latitude;
-        var longitude = callback.longitude;
-
-        fillInputField("inp_longitude", longitude);
-        fillInputField("inp_latitude", latitude);
-
-        fillInputField("inp_hiddenLongitude", longitude);
-        fillInputField("inp_hiddenLatitude", latitude);
-
-        //var mapManager = new MapManager('i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA');
-        var mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
-        document.getElementById("img_map").src = mapManager.getMapUrl(latitude, longitude);
+        img_map.src = mapManager.getMapUrl(callback.latitude, callback.longitude);
     });
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    updateLocation2()
+    updateLocation()
     //alert("Please change the script 'geotagging.js'");
 });
