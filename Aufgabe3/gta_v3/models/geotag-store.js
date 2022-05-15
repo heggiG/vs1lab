@@ -25,8 +25,41 @@
  */
 class InMemoryGeoTagStore{
 
-    // TODO: ... your code here ...
+    static #instance = null;
 
+    #storage = [];
+
+    // #constructor() {
+    //
+    // }
+
+    addGeoTag(geoTag) {
+        if (!geoTag instanceof GeoTag) {
+            throw new Error("Invalid GeoTag");
+        }
+        this.#storage.push(geoTag);
+    }
+
+    removeGeoTag(name) {
+        this.#storage = this.#storage.filter(geoTag => geoTag.name !== name);
+    }
+
+    getNearbyGeoTags(location, radius) {
+        return this.#storage.filter(geoTag => geoTag.distanceTo(location) <= radius);
+    }
+
+    searchNearbyGeoTags(location, radius, keyword) {
+        return this.#storage.filter(geoTag => geoTag.distanceTo(location) <= radius &&
+            (geoTag.name.includes(keyword) || geoTag.hashtag.includes(keyword)));
+    }
+
+    //get singleton instance
+    static getInstance() {
+        if (!InMemoryGeoTagStore.instance) {
+            InMemoryGeoTagStore.instance = new InMemoryGeoTagStore();
+        }
+        return InMemoryGeoTagStore.instance;
+    }
 }
 
 module.exports = InMemoryGeoTagStore

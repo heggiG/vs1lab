@@ -11,8 +11,28 @@
  */
 class GeoTag {
 
-    // TODO: ... your code here ...
-    
+    #name;
+
+    #latitude;
+
+    #longitude;
+
+    #hashtag;
+
+    constructor(name, latitude, longitude, hashtag) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.hashtag = hashtag;
+    }
+
+    distanceTo(other) {
+        //return distance to other geotag in km from longitude and latitude
+        return Math.sqrt(Math.pow(this.latitude - other.latitude, 2)
+            + Math.pow(this.longitude - other.longitude, 2));
+
+    }
+
 }
 
 module.exports = GeoTag;

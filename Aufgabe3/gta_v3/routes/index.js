@@ -1,5 +1,6 @@
 // File origin: VS1LAB A3
 
+
 /**
  * This script defines the main router of the GeoTag server.
  * It's a template for exercise VS1lab/Aufgabe3
@@ -9,7 +10,6 @@
 /**
  * Define module dependencies.
  */
-
 const express = require('express');
 const router = express.Router();
 
@@ -21,7 +21,7 @@ const router = express.Router();
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTag = require('../models/geotag');
-
+const GeoTagExamples = require('../models/geotag-examples');
 /**
  * The module "geotag-store" exports a class GeoTagStore. 
  * It provides an in-memory store for geotag objects.
@@ -42,7 +42,7 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  res.render('index', { taglist: GeoTagExamples.tagList });
 });
 
 /**
@@ -62,13 +62,19 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.post('/tagging', (req, res) => {
+  const geotag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude, req.body.tag);
+  GeoTagStore.getInstance().addGeoTag(geotag);
+  res.render('index', { taglist: GeoTagStore.findByRadius(geotag, 10) });
+});
+
 /**
  * Route '/discovery' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
  *
  * Requests cary the fields of the discovery form in the body.
  * This includes coordinates and an optional search term.
- * (http://expressjs.com/de/4x/api.html#req.body)
+ * (http://expressjs.com/de/4x/api.htm  l#req.body)
  *
  * As response, the ejs-template is rendered with geotag objects.
  * All result objects are located in the proximity of the given coordinates.
@@ -79,5 +85,10 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/discovery', (req, res) => {
+  res.render('index', { taglist:
+        req.body.name ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.name, req.body.latitude, req.body.longitude, 10) :
+            GeoTagStore.getInstance().getNearbyGeoTags(req.body.latitude, req.body.longitude, 10) });
+});
 
 module.exports = router;
