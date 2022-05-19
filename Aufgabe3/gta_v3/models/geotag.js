@@ -33,6 +33,22 @@ class GeoTag {
 
     }
 
+    get name() {
+        return this.#name;
+    }
+
+    get latitude() {
+        return this.#latitude;
+    }
+
+    get longitude() {
+        return this.#longitude;
+    }
+
+    get hashtag() {
+        return this.#hashtag;
+    }
+
 }
 
 module.exports = GeoTag;
