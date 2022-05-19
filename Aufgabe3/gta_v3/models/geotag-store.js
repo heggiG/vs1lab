@@ -53,7 +53,9 @@ class InMemoryGeoTagStore{
             (geoTag.name.includes(keyword) || geoTag.hashtag.includes(keyword)));
     }
 
-    //get singleton instance
+    /**
+      * get singleton instance
+     */
     static getInstance() {
         if (!InMemoryGeoTagStore.instance) {
             InMemoryGeoTagStore.instance = new InMemoryGeoTagStore();

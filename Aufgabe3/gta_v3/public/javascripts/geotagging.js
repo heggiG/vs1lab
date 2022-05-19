@@ -112,7 +112,7 @@ function callbackFunction(helper){
     document.getElementById("inp_hiddenLatitude").value = latitude;
     document.getElementById("inp_hiddenLongitude" ).value = longitude;
 
-    manager = new MapManager ("i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA");
+    manager = new MapManager (process.env.API_KEY);
     var url = manager.getMapUrl(latitude, longitude);
     
     document.getElementById("mapView").src = url;
