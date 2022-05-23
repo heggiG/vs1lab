@@ -1,5 +1,6 @@
 // File origin: VS1LAB A2
 
+
 /* eslint-disable no-unused-vars */
 
 // This script is executed when the browser loads index.html.
@@ -112,8 +113,9 @@ function callbackFunction(helper){
     document.getElementById("inp_hiddenLatitude").value = latitude;
     document.getElementById("inp_hiddenLongitude" ).value = longitude;
 
-    manager = new MapManager (process.env.API_KEY);
-    var url = manager.getMapUrl(latitude, longitude);
+    let manager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
+    GeoTagExamples.tagList;
+    let url = manager.getMapUrl(latitude, longitude);
     
     document.getElementById("mapView").src = url;
    
@@ -126,5 +128,7 @@ function updateLocation(){
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     //alert("Please change the script 'geotagging.js'");
+    let mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
+
     updateLocation();
 });
