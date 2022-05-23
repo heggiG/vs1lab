@@ -1,6 +1,4 @@
-<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
 <!DOCTYPE html>
-
 <!-- File origin: VS1LAB A1a -->
 
 <html lang="en">
@@ -81,6 +79,7 @@
         <div class="discovery__wrapper row">
             <div class="discovery__taglist col-3">
                 <ul class="discovery__results" id="discoveryResults">
+
                     <% if (taglist !== undefined) taglist.forEach((gtag) => { %>
                         <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
                     <% }); %>

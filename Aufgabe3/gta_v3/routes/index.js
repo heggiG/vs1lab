@@ -42,7 +42,7 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: GeoTagExamples.tagList });
+  res.render('index', { taglist: [] });
 });
 
 /**
@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
 router.post('/tagging', (req, res) => {
   const geotag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude, req.body.tag);
   GeoTagStore.getInstance().addGeoTag(geotag);
-  res.render('index', { taglist: GeoTagStore.findByRadius(geotag, 10) });
+  res.render('index', { taglist: GeoTagStore.getInstance().searchNearbyGeoTags(geotag, 10) });
 });
 
 /**
@@ -86,9 +86,9 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
-  res.render('index', { taglist:
-        req.body.name ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.name, req.body.latitude, req.body.longitude, 10) :
-            GeoTagStore.getInstance().getNearbyGeoTags(req.body.latitude, req.body.longitude, 10) });
+  res.render('index', { taglist: GeoTagExamples.tagList });
+        //req.body.name ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.name, req.body.latitude, req.body.longitude, 10) :
+        //   GeoTagStore.getInstance().getNearbyGeoTags(req.body.latitude, req.body.longitude, 10) });
 });
 
 module.exports = router;
