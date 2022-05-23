@@ -5,6 +5,8 @@
  * Complete all TODOs in the code documentation.
  */
 
+const GeoTag = require("./geotag");
+
 /**
  * A class for in-memory-storage of geotags
  * 
@@ -51,6 +53,10 @@ class InMemoryGeoTagStore{
     searchNearbyGeoTags(location, radius, keyword) {
         return this.#storage.filter(geoTag => geoTag.distanceTo(location) <= radius &&
             (geoTag.name.includes(keyword) || geoTag.hashtag.includes(keyword)));
+    }
+
+    get storage() {
+        return this.#storage;
     }
 
     /**
