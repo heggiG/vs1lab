@@ -20,10 +20,10 @@ class GeoTag {
     #hashtag;
 
     constructor(name, latitude, longitude, hashtag) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.hashtag = hashtag;
+        this.#name = name;
+        this.#latitude = latitude;
+        this.#longitude = longitude;
+        this.#hashtag = hashtag;
     }
 
     distanceTo(other) {
