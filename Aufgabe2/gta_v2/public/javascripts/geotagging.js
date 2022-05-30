@@ -97,6 +97,10 @@ class MapManager {
     }
 }
 
+function changeValueOfInput(id, value) {
+    document.getElementById(id).value = value;
+}
+
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
@@ -105,6 +109,7 @@ class MapManager {
 // ... your code here ...
 function updateLocation() {
     LocationHelper.findLocation((callback) => {
+<<<<<<< HEAD
         var latitude = callback.latitude;
         var longitude = callback.longitude;
 
@@ -151,11 +156,27 @@ function updateLocation2() {
         //var mapManager = new MapManager('i6wFNU4SfKpS3CELEc2fO4oeVuQFDNkA');
         var mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
         document.getElementById("img_map").src = mapManager.getMapUrl(latitude, longitude);
+=======
+        changeValueOfInput("inp_latitude", callback.latitude);
+        changeValueOfInput("inp_longitude", callback.longitude);
+
+        changeValueOfInput("inp_hiddenLongitude", callback.longitude);
+        changeValueOfInput("inp_hiddenLatitude", callback.latitude);
+        
+        let mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
+        let img_map = document.getElementById("img_map"); 
+
+        img_map.src = mapManager.getMapUrl(callback.latitude, callback.longitude);
+>>>>>>> refs/remotes/origin/muha
     });
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
+<<<<<<< HEAD
     updateLocation2()
+=======
+    updateLocation()
+>>>>>>> refs/remotes/origin/muha
     //alert("Please change the script 'geotagging.js'");
 });

@@ -167,6 +167,10 @@ header img {
 /* ### TODO ### Styles for Main Component */
 main {
   padding: var(--normal-padding);
+<<<<<<< HEAD
+=======
+  /*flex:content*/
+>>>>>>> refs/remotes/origin/muha
 }
 
 /* ... your code here ... */
@@ -191,7 +195,11 @@ fieldset#fs_addGeoTag {
 
 div.discovery__wrapper {
   margin-top: var(--top-margin);
+<<<<<<< HEAD
   display: flexbox;
+=======
+  display: flex;
+>>>>>>> refs/remotes/origin/muha
 }
 
 fieldset#fs_search {
