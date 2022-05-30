@@ -223,7 +223,7 @@ ul.discovery__results li {
   color: var(--link-color);
 }
 
-img#mapView {
+img#img_map {
   display: block;
   width: 100%;
 }

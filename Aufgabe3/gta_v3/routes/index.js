@@ -10,6 +10,7 @@
  * Define module dependencies.
  */
 
+const { application, json } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -21,6 +22,8 @@ const router = express.Router();
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTag = require('../models/geotag');
+const GeoTagExamples = require('../models/geotag-examples');
+const InMemoryGeoTagStore = require('../models/geotag-store');
 
 /**
  * The module "geotag-store" exports a class GeoTagStore. 
@@ -42,7 +45,14 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  let getTagStorage = InMemoryGeoTagStore.getInstance();
+  let tempTagList = getTagStorage.getAllGeoTags();
+  res.render('index', { 
+    taglist: tempTagList,
+    ejs_latitude: "-49.01508",
+    ejs_longitude: "-8.39007",
+    ejs_mapTagList: JSON.stringify(tempTagList)
+  });
 });
 
 /**
@@ -61,6 +71,17 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/tagging', (req, res) => {
+  let getTagStorage = InMemoryGeoTagStore.getInstance();
+  getTagStorage.addGeoTag(new GeoTag(req.body["latitude"], req.body["longitude"], req.body["name"], req.body["hashtag"]));
+  let tempTagList = getTagStorage.getNearbyGeoTags(req.body["latitude"], req.body["longitude"], 100);
+  res.render('index', { 
+    taglist: tempTagList,
+    ejs_latitude: req.body["latitude"],
+    ejs_longitude: req.body["longitude"],
+    ejs_mapTagList: JSON.stringify(tempTagList) 
+  });
+});
 
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -79,5 +100,15 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/discovery', (req, res) => {
+  let getTagStorage = InMemoryGeoTagStore.getInstance();
+  let tempTagList = getTagStorage.searchNearbyGeoTags(req.body["latitude"], req.body["longitude"], 5, req.body["query"]);
+  res.render('index', { 
+    taglist: tempTagList,
+    ejs_latitude: req.body["latitude"],
+    ejs_longitude: req.body["longitude"],
+    ejs_mapTagList: JSON.stringify(tempTagList)
+  });
+})
 
 module.exports = router;
