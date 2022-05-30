@@ -10,6 +10,7 @@
     <title>GeoTagApp</title>
     <link rel="stylesheet" href="./stylesheets/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
@@ -33,10 +34,10 @@
                     <legend id="lgnd_addGeoTag">Add a new GeoTag</legend>
 
                     <label id="lbl_latitude" for="inp_latitude" class="fit-content">Latitude:</label>
-                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" disabled/>
-
+                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" readonly step="0.00001" value="<%= ejs_latitude %>" />
+                    
                     <label id="lbl_longitude" for="inp_longitude" class="fit-content">Longitude:</label>
-                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" disabled/>
+                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" readonly step="0.00001" value="<%= ejs_longitude %>" />
 
                     <label id="lbl_tagName" for="inp_name" class="fit-content">Name:</label>
                     <input type="text" id="inp_name" name="name" class="fit-content" required placeholder="e.g. Central Berlin" pattern="[a-zA-Z 0-9]+" title="only alphqnumerical characters or spaces, with a mx length of 10 characters" maxlength="10"/>
@@ -66,8 +67,8 @@
                             <label id="lbl_query" for="inp_searchterm" class="fit-content">Search term or keyword:</label>
                             <input type="search" id="inp_searchterm" class="fit-content" name ="query" placeholder="e.g. Berlin">
 
-                            <input type="text" id="inp_hiddenLongitude" class="hiddenInput"/>
-                            <input type="text" id="inp_hiddenLatitude" class="hiddenInput"/>
+                            <input type="text" id="inp_hiddenLongitude" name="longitude" class="hiddenInput" value="<%= ejs_longitude %>" />
+                            <input type="text" id="inp_hiddenLatitude" name="latitude" class="hiddenInput" value="<%= ejs_latitude %>" />
                         
                             <input type="submit" id="sbmtbtn_search" class="fit-content" value="Search" />
                         </div>
@@ -87,7 +88,7 @@
                 </div>
 
                 <div class="discovery__map col-9">
-                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                    <img id="img_map" src="./images/mapview.jpg" data-tags="<%= ejs_mapTagList %>" alt="a map with locations" />
                     <span>Result map</span>
                 </div>
             </div>
@@ -98,11 +99,10 @@
     <footer class="footer">
         <span>(c) 2021/22 HKA_IWI_VSYS</span>
     </footer>
-    
-    <!-- Load JavaScripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./javascripts/geotagging.js"></script>
 </body>
+
+<script src="./javascripts/geotagging.js"></script>
+<script src="./javascripts/location-helper.js"></script>
+<script src="./javascripts/map-manager.js"></script>
 
 </html>
