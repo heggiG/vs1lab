@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
+// File origin: VS1LAB A3
+
 /**
- * VS1LAB:
  * This script does the network configuration and starts up the GeoTag server.
  * For the vs1lab exercise, it doesn't need to be changed.
  */
