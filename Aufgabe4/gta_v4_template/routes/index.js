@@ -12,34 +12,37 @@
 
 const express = require('express');
 const router = express.Router();
-
 /**
- * The module "geotag" exports a class GeoTagStore. 
+ * The module "geotag" exports a class GeoTagStore.
  * It represents geotags.
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTag = require('../models/geotag');
 
 /**
- * The module "geotag-store" exports a class GeoTagStore. 
+ * The module "geotag-store" exports a class GeoTagStore.
  * It provides an in-memory store for geotag objects.
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
-
+const GeoTagEx = require('../models/geotag-examples')
 // App routes (A3)
 
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
  *
- * Requests cary no parameters
+ * Requests carry no parameters
  *
  * As response, the ejs-template is rendered without geotag objects.
  */
 
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+    res.render('index', { taglist: GeoTagEx.geoTagList,
+        ejs_longitude: -1,
+        ejs_latitude: -1,
+        ejs_mapTagList: JSON.stringify(GeoTagEx.geoTagList)
+    })
 });
 
 // API routes (A4)
@@ -57,7 +60,22 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
-
+router.get('/api/geotags', (req, res) => {
+    let term = req.body.name
+    if (req.body.name) {
+        res.render('index', {
+            ejs_longitude: -1,
+            ejs_latitude: -1,
+            ejs_mapTagList: JSON.stringify(GeoTagStore.getInstance().getNearbyGeoTags(req.body.name, 10))
+        });
+    } else {
+        res.render('index', {
+            ejs_longitude: -1,
+            ejs_latitude: -1,
+            ejs_mapTagList: JSON.stringify(GeoTagStore.getInstance().getAllGeoTags())
+        });
+    }
+});
 
 /**
  * Route '/api/geotags' for HTTP 'POST' requests.
@@ -69,8 +87,9 @@ router.get('/', (req, res) => {
  * The URL of the new resource is returned in the header as a response.
  * The new resource is rendered as JSON in the response.
  */
+router.post('/api/geotags', (req, res) => {
 
-// TODO: ... your code here ...
+});
 
 
 /**
@@ -83,7 +102,11 @@ router.get('/', (req, res) => {
  * The requested tag is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.get('/api/geotags/:id', (req, res) => {
+    let id = req.params.id;
+    let store = GeoTagStore.getInstance();
+    res.send(store.getTagById(id)); //automatically converts to JSON
+});
 
 
 /**
@@ -92,15 +115,19 @@ router.get('/', (req, res) => {
  *
  * Requests contain the ID of a tag in the path.
  * (http://expressjs.com/de/4x/api.html#req.params)
- * 
+ *
  * Requests contain a GeoTag as JSON in the body.
  * (http://expressjs.com/de/4x/api.html#req.query)
  *
  * Changes the tag with the corresponding ID to the sent value.
- * The updated resource is rendered as JSON in the response. 
+ * The updated resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.put('/api/geotags/:id', (req, res) => {
+    let tag = JSON.parse(req.body.query);
+    let id = req.params.id;
+    GeoTagStore.getInstance().changeById(id, tag);
+});
 
 
 /**
@@ -114,6 +141,8 @@ router.get('/', (req, res) => {
  * The deleted resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.delete('/api/geotags/:id', (req, res) => {
+
+});
 
 module.exports = router;
