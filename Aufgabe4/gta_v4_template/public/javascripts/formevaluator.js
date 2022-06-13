@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let longitude = document.getElementById('inp_longitude');
         let latitude = document.getElementById('inp_latitude');
         let geotag = new GeoTag(latitude, longitude, name, tag);
-        let id = -1;
-        fetch(`/api/geotags/${id}`, {
+        fetch('/api/geotags/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,16 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById("discoveryFilterForm").addEventListener("submit", () => {
-        let form = document.getElementById("discoveryFilterForm");
-        let id = -1;
-        fetch(`/api/geotags/${id}`)
-            .then(r => r.json())
-            .then(r => {
-            }) //id finden
-            .catch(e => console.error(e));
+        let term = document.getElementById('inp_searchterm');
+        fetch('/api/geotags/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            body: {
+                'searchterm': term
+            },
+        }).then(r => r.json())
+            .then(tags => {
+            let imgMap = document.getElementById("img_map");
+            imgMap.dataset.tags = JSON.stringify(tags);
+            updateLocation();
+        }).catch(e => console.error(e))
 
-        //map erneuern
-        //tag liste erneuern
     });
 
 });
