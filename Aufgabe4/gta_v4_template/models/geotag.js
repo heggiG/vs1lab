@@ -1,11 +1,8 @@
 // File origin: VS1LAB A3
 
-/**
- * This script is a template for exercise VS1lab/Aufgabe3
- * Complete all TODOs in the code documentation.
- */
+let id = 0;
 
-/** * 
+/**
  * A class representing geotags.
  * GeoTag objects should contain at least all fields of the tagging form.
  */
@@ -22,6 +19,7 @@ class GeoTag {
     tag;
 
     constructor(latitude, longitude, name, tag) {
+        this.id = id++;
         this.latitude = latitude
         this.longitude = longitude
         this.name = name
