@@ -1,9 +1,7 @@
 // File origin: VS1LAB A3
 
-/**
- * This script is a template for exercise VS1lab/Aufgabe3
- * Complete all TODOs in the code documentation.
- */
+const GeoTagExamples = require("./geotag-examples");
+
 
 /**
  * A class for in-memory-storage of geotags
@@ -25,8 +23,52 @@
  */
 class InMemoryGeoTagStore{
 
-    // TODO: ... your code here ...
+    #geoTags = [];
+    constructor() {
+        this.geoTags = GeoTagExamples.tagList();
+    }
 
+    addGeoTag(geoTag) {
+        geoTags.push(geoTag);
+    }
+
+    removeGeoTag(geoTagName) {
+        for(i = 0; i < geoTags.length; i++) {
+            if(this.geoTags[i].name() == geoTagName) {
+                this.geoTags.splice(i,1);
+            }
+        }
+    }
+
+
+
+    getNearbyGeoTags(latitude, longitude) {
+        result = [];
+        radius = 10; //some radius
+        for(i = 0; i < geoTags.length; i++) {
+            if(this.#distance(this.geoTags[i].latitude(), this.geoTags[i].longitude, latitude, longitude) <= radius) {
+                result.push(this.geoTags[i]);
+            }
+        }
+    }
+
+    #distance(latitude1, longitude1, latitude2, longitude2) {
+        return Math.sqrt((latitude1 - latitude2) ^ 2 + (longitude1 - longitude2) ^ 2)
+    }
+
+
+    searchNearbyGeoTags(latitude, longitude, keyword) {
+        nearbyGeoTags = getNearbyGeoTags(latitude, longitude);
+        result = [];
+
+        for(i = 0; i < nearbyGeoTags.length; i++) {
+            if((nearbyGeoTags[i].name().toLowerCase().indexOf(keyword.toLowerCase()) > -1)
+            || (nearbyGeoTags[i].hashtag().toLowerCase().indexOf(keyword.toLowerCase()) > -1)) {
+                result.push(nearbyGeoTags[i]);
+            }
+        }
+        return result;
+    }
 }
 
 module.exports = InMemoryGeoTagStore
