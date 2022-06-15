@@ -3,10 +3,9 @@
 /**
  * A class to help using the MapQuest map service.
  */
-// eslint-disable-next-line no-unused-vars
-class MapManager {
-
-    #apiKey;
+ // eslint-disable-next-line no-unused-vars
+ class MapManager {
+    #apiKey
 
     /**
      * Create a new MapManager instance
@@ -24,7 +23,7 @@ class MapManager {
      * @param {number} zoom The map zoom, defaults to 12
      * @returns {string} URL of generated map
      */
-    getMapUrl(latitude, longitude, tags = [], zoom = 15) {
+    getMapUrl(latitude, longitude, tags = [], zoom = 12) {
         if (!this.#apiKey) {
             console.log("No API key provided.");
             return "images/mapview.jpg";

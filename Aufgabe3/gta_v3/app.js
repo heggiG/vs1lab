@@ -2,8 +2,6 @@
 
 /**
  * This script configures the main express app of the GeoTag server.
- * It's a template for exercise VS1lab/Aufgabe3
- * Complete all TODOs in the code documentation.
  */
 
 /**

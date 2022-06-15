@@ -1,9 +1,5 @@
 // File origin: VS1LAB A3
 
-/**
- * This script is a template for exercise VS1lab/Aufgabe3
- * Complete all TODOs in the code documentation.
- */
 
 const GeoTag = require("./geotag");
 
