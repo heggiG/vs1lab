@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let latitude = parseFloat(document.getElementById('inp_latitude').value);
         let geotag = new SimpleTag(latitude, longitude, name, tag); //
         fetch('/api/geotags/', { //ajax call to put new tag
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
