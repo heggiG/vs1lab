@@ -27,12 +27,13 @@ const GeoTagExamples = require("./geotag-examples");
  * - Keyword matching should include partial matches from name or hashtag fields. 
  */
 class InMemoryGeoTagStore{
-
+    // TODO: ... your code here ...
     static #instance = null;
-
+    /**
+     * @type {GeoTag[]}
+     */
     #tagStorage = []
-
-
+    
     /**
      * 
      * @returns {InMemoryGeoTagStore}
@@ -64,18 +65,11 @@ class InMemoryGeoTagStore{
     }
 
     /**
-     *
-     * @returns {GeoTag[]}
+     * 
+     * @param {String} id
      */
-    getAllGeoTags() {
-        return this.#tagStorage
-    }
-
-    /**
-     * Returns a geotag by its id
-     */
-    getTagById(id) {
-        return this.#tagStorage.filter(tag => tag.id === id)[0];
+     removeGeoTagById(id) {
+        this.#tagStorage = this.#tagStorage.filter(geoTag => geoTag.id != id);
     }
 
     /**
@@ -91,7 +85,7 @@ class InMemoryGeoTagStore{
             if (Math.sqrt(Math.pow(Math.abs(item.latitude - latitude), 2) + Math.pow(Math.abs(item.latitude - longitude), 2)) <= radius) {
                 temp.push(item);
             }
-        });
+        })
 
         return temp;
     }
@@ -108,14 +102,44 @@ class InMemoryGeoTagStore{
         let temp = [];
         this.#tagStorage.forEach(item => {
             if ((Math.sqrt(Math.pow(item.latitude - latitude, 2) + Math.pow(item.longitude - longitude, 2)) <= radius) 
-            && (item.name.includes(keyword) || (item.tag !== undefined && item.tag.includes(keyword)))) {
+            && (item.name.includes(keyword) || (item.tag != undefined &&item.tag.includes(keyword)))) {
                 temp.push(item);
             }
-        });
+        })
 
         return temp;
     }
 
+    /**
+     * 
+     * @returns {GeoTag[]}
+     */
+    getAllGeoTags() {
+        return this.#tagStorage
+    }
+
+    /**
+     * 
+     * @param {String} name 
+     */
+    getGeoTagById(id) {
+        return this.#tagStorage.filter(geoTag => geoTag.id == id)[0];
+    }
+
+    /**
+     * 
+     * @returns {GeoTag[]}
+     */
+    searchGeoTags(keyword) {
+        let temp = [];
+        this.#tagStorage.forEach(item => {
+            if (item.name.includes(keyword) || (item.tag != undefined && item.tag.includes(keyword))) {
+                temp.push(item);
+            }
+        })
+
+        return temp;
+    }
 }
 
 module.exports = InMemoryGeoTagStore
