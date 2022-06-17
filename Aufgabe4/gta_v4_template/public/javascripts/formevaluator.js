@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let longitude = parseFloat(document.getElementById('inp_longitude').value);
         let latitude = parseFloat(document.getElementById('inp_latitude').value);
         let geotag = new SimpleTag(latitude, longitude, name, tag); //
+
         fetch('/api/geotags/', { //ajax call to put new tag
             method: 'POST',
             headers: {
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentTags.push(geotag);
             map.dataset.tags = JSON.stringify(currentTags);
             updateLocation();
+            //renewTagList();
         }).catch(e => console.error(e))
 
     }, true);
