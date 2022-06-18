@@ -82,7 +82,7 @@ class InMemoryGeoTagStore{
     getNearbyGeoTags(latitude, longitude, radius) {
         let temp = [];
         this.#tagStorage.forEach(item => {
-            if (Math.sqrt(Math.pow(Math.abs(item.latitude - latitude), 2) + Math.pow(Math.abs(item.latitude - longitude), 2)) <= radius) {
+            if ((Math.sqrt(Math.pow(item.latitude - latitude, 2) + Math.pow(item.longitude - longitude, 2)) <= radius)) {
                 temp.push(item);
             }
         })

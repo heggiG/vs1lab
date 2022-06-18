@@ -57,7 +57,7 @@ class GeoTag {
         return this.tag;
     }
 
-    get id() {
+    get gtId() {
         return this.gtId;
     }
 }

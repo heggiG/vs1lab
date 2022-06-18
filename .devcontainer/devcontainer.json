@@ -13,7 +13,13 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"ms-vscode-remote.remote-containers",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"VisualStudioExptTeam.intellicode-api-usage-examples",
+		"ritwickdey.LiveServer",
+		"humao.rest-client",
+		"MS-CEINTL.vscode-language-pack-de"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
