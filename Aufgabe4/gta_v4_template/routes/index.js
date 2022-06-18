@@ -148,7 +148,7 @@ router.get('/api/geotags', (req, res) => {
         }
     }
 
-    res.json(JSON.stringify(tempTagList));
+    res.json(tempTagList);
 });
 
 
@@ -180,7 +180,7 @@ router.post('/api/geotags', (req, res) => {
     console.log('newGeoTag.gtId' + newGeoTag.gtId);
     console.log('url' + url);
     res.statusCode = 201; //Code stems from the Readme
-    res.json(JSON.stringify(newGeoTag));
+    res.json(newGeoTag);
 })
 
 /**
@@ -198,7 +198,7 @@ router.post('/api/geotags', (req, res) => {
 router.get('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let requestedGeoTag = tagStorage.getGeoTagById(req.params.id); //ID!
-    res.json(JSON.stringify(requestedGeoTag));
+    res.json(requestedGeoTag);
 });
 
 /**
@@ -228,7 +228,7 @@ router.put('/api/geotags/:id', (req, res) => {
     let newGeoTag = new GeoTag(latitude, longitude, name, tag);
     newGeoTag.gtId = req.params.id;
     tagStorage.addGeoTag(newGeoTag);
-    res.json(JSON.stringify(newGeoTag));
+    res.json(newGeoTag);
 })
 
 /**
@@ -249,7 +249,7 @@ router.delete('/api/geotags/:id', (req, res) => {
     let deletedGeoTag = tagStorage.getGeoTagById(req.params.id);
     tagStorage.removeGeoTagById(req.params.id);
 
-    res.json(JSON.stringify(deletedGeoTag));
+    res.json(deletedGeoTag);
 })
 
 module.exports = router;
