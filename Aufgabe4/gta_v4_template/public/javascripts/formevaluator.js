@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btn_previousPage").addEventListener("click", (event) => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] > 1) {
-            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`), {
+            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(r => r.json()).then(tags => {
+            }.then(r => r.json()).then(tags => {
                 let tagsArray = JSON.parse(tags);
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
                
