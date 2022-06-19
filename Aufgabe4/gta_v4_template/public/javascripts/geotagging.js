@@ -48,7 +48,7 @@ function updateLocation() {
         let tagList = JSON.parse(tagString)
         
         let mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
-        img_map.src = mapManager.getMapUrl(inp_latitude.value, inp_longitude.value, tagList)
+        img_map.src = mapManager.getMapUrl(tagList[0].latitude, tagList[0].longitude, tagList)
     }
 }
 

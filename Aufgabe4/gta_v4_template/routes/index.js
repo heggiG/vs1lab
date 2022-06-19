@@ -128,8 +128,6 @@ router.post('/discovery', (req, res) => {
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
 
-// TODO: ... your code here ...
-
 
 router.get('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
@@ -254,6 +252,7 @@ router.put('/api/geotags/:id', (req, res) => {
 
 router.delete('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
+
     let deletedGeoTag = tagStorage.getGeoTagById(req.params.id);
     tagStorage.removeGeoTagById(req.params.id);
 

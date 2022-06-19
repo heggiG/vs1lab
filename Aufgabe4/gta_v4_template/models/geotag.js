@@ -1,6 +1,6 @@
 // File origin: VS1LAB A3
 
-let tagId = 0
+let tagId = 0;
 
 /**
  * This script is a template for exercise VS1lab/Aufgabe3
