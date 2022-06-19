@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("tag-form").addEventListener("submit", (event) => {
         event.preventDefault();
-
+        let dataElement = document.getElementById("dataElement");
         let name = document.getElementById('inp_name').value;
         let tag = document.getElementById('inp_hashtag').value;
         let longitude = parseFloat(document.getElementById('inp_longitude').value);
@@ -21,22 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentTags = JSON.parse(map.dataset.tags); //get the current tags
             currentTags.push(geotag); //add the new tag client side
 
-            let tagsArray = JSON.parse(r);
             dataElement.dataset.currentpage = 0;
-           
+
             document.getElementById("discoveryResults").innerHTML = "";
             
-            for (let index = 0; index < tagsArray.length; index++) {
+            for (let index = 0; index < currentTags.length; index++) {
                 let entry = document.createElement("li");
                 entry.classList.add("resultListElement");
                 
-                entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ") " + tagsArray[index].tag
+                entry.innerHTML = currentTags[index].name +" (" + currentTags[index].latitude + "," + currentTags[index].longitude + ") " + currentTags[index].tag
                 
                 document.getElementById("discoveryResults").appendChild(entry);
             }
             
             dataElement.dataset["numberofentries"] = Number(dataElement.dataset["numberofentries"]) + 1
-            document.getElementById("lbl_numberOfEntries") = dataElement.dataset["numberofentries"]
+            document.getElementById("lbl_numberOfEntries").value = dataElement.dataset["numberofentries"]
             
             map.dataset.tags = JSON.stringify(currentTags); //set the new taglist
             updateLocation(); //update the map
@@ -46,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("discoveryFilterForm").addEventListener("submit", (event) => {
         event.preventDefault();
+        let dataElement = document.getElementById("dataElement");
         let term = document.getElementById('inp_searchterm').value;
         fetch(`/api/geotags/?query=${term}`, {
             method: 'GET',
@@ -89,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(r => r.json()).then(tags => {
-                let tagsArray = JSON.parse(tags);
+            }).then(r => r.json()).then(tagsArray => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) - 1;
                 
                 document.getElementById("discoveryResults").innerHTML = "";
@@ -107,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
 
                 let imgMap = document.getElementById("img_map");
-                imgMap.dataset.tags = tags;
+                imgMap.dataset.tags = JSON.stringify(tagsArray);
                 updateButtons();
                 updateLocation();
             })
@@ -123,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(r => r.json()).then(tags => {
-                let tagsArray = JSON.parse(tags);
+            }).then(r => r.json()).then(tagsArray => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
                
                 document.getElementById("discoveryResults").innerHTML = "";
@@ -140,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"]
 
                 let imgMap = document.getElementById("img_map");
-                imgMap.dataset.tags = tags;
+                imgMap.dataset.tags = JSON.stringify(tagsArray);
 
                 updateButtons();
                 updateLocation();
