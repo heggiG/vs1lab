@@ -121,12 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btn_nextPage").addEventListener("click", (event) => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] < dataElement.dataset["lastpage"]) {
-            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`), {
+            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
                 mehod: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }.then(r => r.json()).then(tags => {
+            }).then(r => r.json()).then(tags => {
                 let tagsArray = JSON.parse(tags);
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
                
