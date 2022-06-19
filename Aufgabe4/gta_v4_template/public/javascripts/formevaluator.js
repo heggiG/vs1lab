@@ -51,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //let dataElement = document.getElementById("dataElement");
 
     document.getElementById("btn_previousPage").addEventListener("click", (event) => {
-        //event.preventDefault();
-        console.log("T")
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] > 1) {
             fetch("/api/geotags/page/" + (Number(dataElement.dataset.currentpage) - 1), {
@@ -76,8 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById("discoveryResults").appendChild(entry);
                     //listEntries[index].innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].hashtag
                 }
+                dataElement.dataset["currentpage"] = Number(dataElement.dataset["currentpage"]);
+                document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
+
                 let imgMap = document.getElementById("img_map");
-                imgMap.dataset.tags = JSON.stringify(tags)
+                imgMap.dataset.tags = JSON.stringify(tags);
                 updateButtons();
             })
         }
@@ -85,8 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     document.getElementById("btn_nextPage").addEventListener("click", (event) => {
-        //event.preventDefault();
-        console.log("T2")
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] < dataElement.dataset["lastpage"]) {
             fetch("/api/geotags/page/" + (Number(dataElement.dataset.currentpage) +1), {
@@ -97,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then(r => r.json()).then(tags => {
                 let tagsArray = JSON.parse(tags);
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
-                let listEntries = document.getElementsByClassName("resultListElement");
-                
                
                 document.getElementById("discoveryResults").innerHTML = "";
                 
@@ -110,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 }
+                dataElement.dataset["currentpage"] = Number(dataElement.dataset["currentpage"])  
+                document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"]
+
                 let imgMap = document.getElementById("img_map");
                 imgMap.dataset.tags = JSON.stringify(tags);
                 updateButtons();

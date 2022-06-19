@@ -88,7 +88,10 @@
                     
                     <div class="dataElement" id="dataElement" data-currentPage="<%= ejs_currentPageNumber %>" data-lastPage="<%= ejs_maxPageNumber %>">
                         <button id="btn_previousPage">&lt;</button>
-                        <label> <%= ejs_currentPageNumber %> / <%= ejs_maxPageNumber %> (<%= ejs_numberOfEntries %>) </label>
+                        <label id="lbl_currentPageNumber"> <%= ejs_currentPageNumber %> </label>  
+                        <label> / </label> 
+                        <label id="lbl_maxPageNumber"><%= ejs_maxPageNumber %></label> 
+                        <label id="lbl_numberOfEntries">(<%= ejs_numberOfEntries %>)</label>
                         <button id="btn_nextPage">&gt;</button>
                     </div>
                 </div>

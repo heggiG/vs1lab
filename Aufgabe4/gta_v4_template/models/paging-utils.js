@@ -10,7 +10,6 @@ class Paging{
     /**
      * 
      * @param {GeoTag[]} tagList 
-     * @param {int} pageSize 
      * @param {int} pageNumber 
      * @returns {GeoTag[]}
      */

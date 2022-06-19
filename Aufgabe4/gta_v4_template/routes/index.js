@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
         ejs_longitude: val_longitude,
         ejs_currentPageNumber: 1,
         ejs_maxPageNumber: Math.ceil(tempTagList.length/Paging.getPageSize()),
-        ejs_mapTagList: JSON.stringify(Paging.getPage(tempTagList, 0)),
+        ejs_mapTagList: JSON.stringify(Paging.getPage(tempTagList, 1)),
         ejs_numberOfEntries: tempTagList.length
     });
 });
