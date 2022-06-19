@@ -45,7 +45,6 @@ const Paging = require('../models/paging-utils');
  */
 
 router.get('/', (req, res) => {
-    console.log(Paging)
     let val_latitude = (req.body["latitude"] != undefined) ? req.body["latitude"] : "-49.01508"
     let val_longitude = (req.body["longitude"] != undefined) ? req.body["longitude"] : "-8.39007"
     let getTagStorage = InMemoryGeoTagStore.getInstance();
@@ -135,22 +134,23 @@ router.get('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = [];
     let query = url.parse(req.url, true).query;
-    console.log(query["latitude"]);
     let radius = -1;
-    if(query["radius"] === undefined) {
+    if(query["radius"] == undefined) {
         radius = 5;
     } else {
         radius = query["radius"];
     }
     if (query["latitude"] >= 0 && query["longitude"] >= 0) {
-        if(query["searchterm"] !== undefined) {
-            tempTagList = tagStorage.searchNearbyGeoTags(query["latitude"], query["longitude"], radius, query["searchterm"]);
+        if(query["query"] != undefined) {
+        //if(query["searchterm"] !== undefined) {
+            tempTagList = tagStorage.searchNearbyGeoTags(query["latitude"], query["longitude"], radius, query["query"]);
         } else {
             tempTagList = tagStorage.getNearbyGeoTags(query["latitude"], query["longitude"], radius);
         }
     } else {
-        if(query["searchterm"] !== undefined) {
-            tempTagList = tagStorage.searchGeoTags(query["searchterm"]);
+        if(query["query"] != undefined) {
+        ///if(query["searchterm"] !== undefined) {
+            tempTagList = tagStorage.searchGeoTags(query["query"]);
         } else {
             tempTagList = tagStorage.getAllGeoTags();
         }
@@ -266,7 +266,7 @@ router.get('/api/geotags/page/:id', (req, res) => {
   let tagStorage = GeoTagStore.getInstance();
   let searchterm = req.query.searchterm
   let geotags = []
-  if (searchterm == "undefined") { 
+  if (searchterm == undefined) { 
     geotags = tagStorage.getAllGeoTags(); //ID!
   } else {
     geotags = tagStorage.searchGeoTags(searchterm);
