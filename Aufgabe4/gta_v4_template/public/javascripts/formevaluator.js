@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btn_previousPage").addEventListener("click", (event) => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] > 1) {
-            fetch("/api/geotags/page/" + (Number(dataElement.dataset.currentpage) - 1), {
+            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btn_nextPage").addEventListener("click", (event) => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] < dataElement.dataset["lastpage"]) {
-            fetch("/api/geotags/page/" + (Number(dataElement.dataset.currentpage) +1), {
+            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`), {
                 mehod: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
