@@ -31,6 +31,8 @@ const InMemoryGeoTagStore = require('../models/geotag-store');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const Paging = require('../models/paging-utils');
+
 // App routes (A3)
 
 /**
@@ -43,13 +45,19 @@ const GeoTagStore = require('../models/geotag-store');
  */
 
 router.get('/', (req, res) => {
+    console.log(Paging)
+    let val_latitude = (req.body["latitude"] != undefined) ? req.body["latitude"] : "-49.01508"
+    let val_longitude = (req.body["longitude"] != undefined) ? req.body["longitude"] : "-8.39007"
     let getTagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = getTagStorage.getAllGeoTags();
     res.render('index', {
-        taglist: tempTagList,
-        ejs_latitude: "-49.01508",
-        ejs_longitude: "-8.39007",
-        ejs_mapTagList: JSON.stringify(tempTagList)
+        taglist: Paging.getPage(tempTagList, 0),
+        ejs_latitude: val_latitude,
+        ejs_longitude: val_longitude,
+        ejs_currentPageNumber: 1,
+        ejs_maxPageNumber: Math.ceil(tempTagList.length/Paging.getPageSize()),
+        ejs_mapTagList: JSON.stringify(Paging.getPage(tempTagList, 1)),
+        ejs_numberOfEntries: tempTagList.length
     });
 });
 
@@ -116,15 +124,20 @@ router.post('/discovery', (req, res) => {
  * (http://expressjs.com/de/4x/api.html#req.body)
  *
  * As a response, an array with Geo Tag objects is rendered as JSON.
- * If 'searchterm' is present, it will be filtered by search term.
+ * If 'searchterm' is present, it will be filtered by search term. "query" not "searchterm"
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
+
+// TODO: ... your code here ...
+
+
 router.get('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = [];
     let query = url.parse(req.url, true).query;
+    console.log(query["latitude"]);
     let radius = -1;
-    if(query["radius"] == undefined) {
+    if(query["radius"] === undefined) {
         radius = 5;
     } else {
         radius = query["radius"];
@@ -158,6 +171,9 @@ router.get('/api/geotags', (req, res) => {
  * The URL of the new resource is returned in the header as a response.
  * The new resource is rendered as JSON in the response.
  */
+
+// TODO: ... your code here ...
+
 router.post('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let simpleGeoTag = req.body;
@@ -184,6 +200,9 @@ router.post('/api/geotags', (req, res) => {
  *
  * The requested tag is rendered as JSON in the response.
  */
+
+// TODO: ... your code here ...
+
 router.get('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let requestedGeoTag = tagStorage.getGeoTagById(req.params.id); //ID!
@@ -203,6 +222,9 @@ router.get('/api/geotags/:id', (req, res) => {
  * Changes the tag with the corresponding ID to the sent value.
  * The updated resource is rendered as JSON in the response.
  */
+
+// TODO: ... your code here ...
+
 router.put('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     tagStorage.removeGeoTagById(req.params.id);
@@ -227,13 +249,24 @@ router.put('/api/geotags/:id', (req, res) => {
  * Deletes the tag with the corresponding ID.
  * The deleted resource is rendered as JSON in the response.
  */
+
+// TODO: ... your code here ...
+
 router.delete('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
-
     let deletedGeoTag = tagStorage.getGeoTagById(req.params.id);
     tagStorage.removeGeoTagById(req.params.id);
 
     res.json(deletedGeoTag);
 })
+
+
+router.get('/api/geotags/page/:id', (req, res) => {
+  let tagStorage = GeoTagStore.getInstance();
+  
+  let geotags = tagStorage.getAllGeoTags(); //ID!
+  
+  res.json(JSON.stringify(Paging.getPage(geotags, req.params.id-1)));
+});
 
 module.exports = router;
