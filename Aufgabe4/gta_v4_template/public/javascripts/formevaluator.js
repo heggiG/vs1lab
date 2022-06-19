@@ -78,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
 
                 let imgMap = document.getElementById("img_map");
-                imgMap.dataset.tags = JSON.stringify(tags);
+                imgMap.dataset.tags = tags;
                 updateButtons();
+                updateLocation();
             })
         }
     })
@@ -111,8 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"]
 
                 let imgMap = document.getElementById("img_map");
-                imgMap.dataset.tags = JSON.stringify(tags);
+                imgMap.dataset.tags = tags;
+
                 updateButtons();
+                updateLocation();
             })
         }
     })
