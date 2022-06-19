@@ -167,10 +167,7 @@ header img {
 /* ### TODO ### Styles for Main Component */
 main {
   padding: var(--normal-padding);
-<<<<<<< HEAD
   /*flex:content*/
-=======
->>>>>>> origin/dev
 }
 
 /* ... your code here ... */
@@ -195,11 +192,7 @@ fieldset#fs_addGeoTag {
 
 div.discovery__wrapper {
   margin-top: var(--top-margin);
-<<<<<<< HEAD
   display: flex;
-=======
-  display: flexbox;
->>>>>>> origin/dev
 }
 
 fieldset#fs_search {
@@ -231,14 +224,9 @@ ul.discovery__results li {
   color: var(--link-color);
 }
 
-<<<<<<< HEAD
 img#img_map {
   display: block;
   width: 100%;
-=======
-img#mapView {
-  display: block;
->>>>>>> origin/dev
 }
 /* ... your code here ... */
 

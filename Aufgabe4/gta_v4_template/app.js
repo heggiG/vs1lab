@@ -2,6 +2,8 @@
 
 /**
  * This script configures the main express app of the GeoTag server.
+ * It's a template for exercise VS1lab/Aufgabe3
+ * Complete all TODOs in the code documentation.
  */
 
 /**
@@ -41,12 +43,8 @@ app.use(express.urlencoded({ extended: false }));
  */
 
 // TODO: ... your code here ...
-<<<<<<< HEAD
 app.use(express.static(__dirname + "/public"))
 
-=======
-app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> origin/dev
 // Set dedicated script for routing
 app.use('/', indexRouter);
 

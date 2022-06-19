@@ -1,6 +1,5 @@
 // File origin: VS1LAB A3
 
-<<<<<<< HEAD
 const GeoTag = require("./geotag");
 const GeoTagExamples = require("./geotag-examples");
 
@@ -8,10 +7,6 @@ const GeoTagExamples = require("./geotag-examples");
  * This script is a template for exercise VS1lab/Aufgabe3
  * Complete all TODOs in the code documentation.
  */
-=======
-const GeoTagExamples = require("./geotag-examples");
-
->>>>>>> origin/dev
 
 /**
  * A class for in-memory-storage of geotags
@@ -32,7 +27,6 @@ const GeoTagExamples = require("./geotag-examples");
  * - Keyword matching should include partial matches from name or hashtag fields. 
  */
 class InMemoryGeoTagStore{
-<<<<<<< HEAD
     // TODO: ... your code here ...
     static #instance = null;
     /**
@@ -72,6 +66,14 @@ class InMemoryGeoTagStore{
 
     /**
      * 
+     * @param {String} id
+     */
+     removeGeoTagById(id) {
+        this.#tagStorage = this.#tagStorage.filter(geoTag => geoTag.id != id);
+    }
+
+    /**
+     * 
      * @param {int} latitude 
      * @param {int} longitude 
      * @param {int} radius 
@@ -80,7 +82,7 @@ class InMemoryGeoTagStore{
     getNearbyGeoTags(latitude, longitude, radius) {
         let temp = [];
         this.#tagStorage.forEach(item => {
-            if (Math.sqrt(Math.pow(Math.abs(item.latitude - latitude), 2) + Math.pow(Math.abs(item.latitude - longitude), 2)) <= radius) {
+            if ((Math.sqrt(Math.pow(item.latitude - latitude, 2) + Math.pow(item.longitude - longitude, 2)) <= radius)) {
                 temp.push(item);
             }
         })
@@ -114,54 +116,29 @@ class InMemoryGeoTagStore{
      */
     getAllGeoTags() {
         return this.#tagStorage
-=======
-
-    #geoTags = [];
-    constructor() {
-        this.geoTags = GeoTagExamples.tagList();
     }
 
-    addGeoTag(geoTag) {
-        geoTags.push(geoTag);
+    /**
+     * 
+     * @param {String} name 
+     */
+    getGeoTagById(id) {
+        return this.#tagStorage.filter(geoTag => geoTag.id == id)[0];
     }
 
-    removeGeoTag(geoTagName) {
-        for(i = 0; i < geoTags.length; i++) {
-            if(this.geoTags[i].name() == geoTagName) {
-                this.geoTags.splice(i,1);
+    /**
+     * 
+     * @returns {GeoTag[]}
+     */
+    searchGeoTags(keyword) {
+        let temp = [];
+        this.#tagStorage.forEach(item => {
+            if (item.name.includes(keyword) || (item.tag != undefined && item.tag.includes(keyword))) {
+                temp.push(item);
             }
-        }
-    }
+        })
 
-
-
-    getNearbyGeoTags(latitude, longitude) {
-        result = [];
-        radius = 10; //some radius
-        for(i = 0; i < geoTags.length; i++) {
-            if(this.#distance(this.geoTags[i].latitude(), this.geoTags[i].longitude, latitude, longitude) <= radius) {
-                result.push(this.geoTags[i]);
-            }
-        }
-    }
-
-    #distance(latitude1, longitude1, latitude2, longitude2) {
-        return Math.sqrt((latitude1 - latitude2) ^ 2 + (longitude1 - longitude2) ^ 2)
-    }
-
-
-    searchNearbyGeoTags(latitude, longitude, keyword) {
-        nearbyGeoTags = getNearbyGeoTags(latitude, longitude);
-        result = [];
-
-        for(i = 0; i < nearbyGeoTags.length; i++) {
-            if((nearbyGeoTags[i].name().toLowerCase().indexOf(keyword.toLowerCase()) > -1)
-            || (nearbyGeoTags[i].hashtag().toLowerCase().indexOf(keyword.toLowerCase()) > -1)) {
-                result.push(nearbyGeoTags[i]);
-            }
-        }
-        return result;
->>>>>>> origin/dev
+        return temp;
     }
 }
 
