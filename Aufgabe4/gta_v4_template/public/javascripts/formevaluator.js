@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let tag = document.getElementById('inp_hashtag').value;
         let longitude = parseFloat(document.getElementById('inp_longitude').value);
         let latitude = parseFloat(document.getElementById('inp_latitude').value);
-        let geotag = new SimpleTag(latitude, longitude, name, tag); //
+        let geotag = new SimpleTag(latitude, longitude, name, tag); //new tag to send over ajax
 
         fetch('/api/geotags/', { //ajax call to put new tag
             method: 'POST',
@@ -17,11 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(geotag),
         }).then(r => { //update map
             let map = document.getElementById("img_map");
-            let currentTags = JSON.parse(map.dataset.tags);
-            currentTags.push(geotag);
-            map.dataset.tags = JSON.stringify(currentTags);
-            updateLocation();
-            //renewTagList();
+            let currentTags = JSON.parse(map.dataset.tags); //get the current tags
+            currentTags.push(geotag); //add the new tag client side
+            map.dataset.tags = JSON.stringify(currentTags); //set the new taglist
+            updateLocation(); //update the map
         }).catch(e => console.error(e))
 
     }, true);

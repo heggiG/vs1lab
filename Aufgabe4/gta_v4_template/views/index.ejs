@@ -34,10 +34,10 @@
                     <legend id="lgnd_addGeoTag">Add a new GeoTag</legend>
 
                     <label id="lbl_latitude" for="inp_latitude" class="fit-content">Latitude:</label>
-                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" readonly step="0.00001" value="<%= ejs_latitude %>" />
+                    <input type="number" id="inp_latitude" name="latitude" class="fit-content" step="0.00001" value="<%= ejs_latitude %>" />
                     
                     <label id="lbl_longitude" for="inp_longitude" class="fit-content">Longitude:</label>
-                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" readonly step="0.00001" value="<%= ejs_longitude %>" />
+                    <input type="number" id="inp_longitude" name="longitude" class="fit-content" step="0.00001" value="<%= ejs_longitude %>" />
 
                     <label id="lbl_tagName" for="inp_name" class="fit-content">Name:</label>
                     <input type="text" id="inp_name" name="name" class="fit-content" required placeholder="e.g. Central Berlin" pattern="[a-zA-Z 0-9]+" title="only alphqnumerical characters or spaces, with a mx length of 10 characters" maxlength="10"/>
