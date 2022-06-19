@@ -1,4 +1,4 @@
-// File origin: VS1LAB A2
+ // File origin: VS1LAB A2
 
 /* eslint-disable no-unused-vars */
 
@@ -7,8 +7,6 @@
 // "console.log" writes to the browser's console. 
 // The console window must be opened explicitly in the browser.
 // Try to find this output in the browser...
-console.log("The geoTagging script is going to start...");
-
 
 function changeValueOfInput(id, value) {
     document.getElementById(id).value = value;
@@ -23,8 +21,8 @@ function changeValueOfInput(id, value) {
 function updateLocation() {
     let inp_latitude = document.getElementById("inp_latitude");
     let inp_longitude = document.getElementById("inp_longitude");
-    let inp_hiddenLatitude = document.getElementById("inp_hiddenLatitude");
-    let inp_hiddenLongitude = document.getElementById("inp_hiddenLongitude");
+    //let inp_hiddenLatitude = document.getElementById("inp_hiddenLatitude");
+    //let inp_hiddenLongitude = document.getElementById("inp_hiddenLongitude");
 
     if (inp_latitude.value < 0) { //Swap Frog: better gate
         LocationHelper.findLocation((callback) => {
@@ -35,7 +33,7 @@ function updateLocation() {
             changeValueOfInput("inp_hiddenLatitude", callback.latitude);
         
             
-            let mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
+            let mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
             let img_map = document.getElementById("img_map"); 
 
             let tagString = img_map.dataset.tags
@@ -49,13 +47,12 @@ function updateLocation() {
         let tagString = img_map.dataset.tags
         let tagList = JSON.parse(tagString)
         
-        let mapManager = new MapManager('f64689zc2fhvhu0miIiVlLaUAchTYDWv');
-        img_map.src = mapManager.getMapUrl(inp_latitude.value, inp_longitude.value, tagList)
+        let mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
+        img_map.src = mapManager.getMapUrl(tagList[0].latitude, tagList[0].longitude, tagList)
     }
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation()
-    //alert("Please change the script 'geotagging.js'");
 });

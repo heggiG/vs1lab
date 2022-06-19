@@ -26,9 +26,10 @@ const GeoTagExamples = require("./geotag-examples");
  * - The proximity constrained is the same as for 'getNearbyGeoTags'.
  * - Keyword matching should include partial matches from name or hashtag fields. 
  */
-class InMemoryGeoTagStore{
-    // TODO: ... your code here ...
+class InMemoryGeoTagStore {
+
     static #instance = null;
+
     /**
      * @type {GeoTag[]}
      */
@@ -64,12 +65,8 @@ class InMemoryGeoTagStore{
         this.#tagStorage = this.#tagStorage.filter(geoTag => geoTag.name != name);
     }
 
-    /**
-     * 
-     * @param {String} id
-     */
      removeGeoTagById(id) {
-        this.#tagStorage = this.#tagStorage.filter(geoTag => geoTag.id != id);
+        this.#tagStorage = this.#tagStorage.filter(geoTag => geoTag.gtId != id);
     }
 
     /**
@@ -123,7 +120,7 @@ class InMemoryGeoTagStore{
      * @param {String} name 
      */
     getGeoTagById(id) {
-        return this.#tagStorage.filter(geoTag => geoTag.id == id)[0];
+        return this.#tagStorage.filter(geoTag => geoTag.gtId == id)[0];
     }
 
     /**
