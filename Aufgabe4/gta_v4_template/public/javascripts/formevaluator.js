@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
                     
-                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].hashtag
+                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                     //listEntries[index].innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].hashtag
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
                     
-                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].hashtag
+                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 }
@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateButtons(){
     let dataElement = document.getElementById("dataElement");
-    console.log(dataElement.dataset)
     if (dataElement.dataset["currentpage"] == 1) {
         document.getElementById("btn_previousPage").disabled = true;
     } else {
