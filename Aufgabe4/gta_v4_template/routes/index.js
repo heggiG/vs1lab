@@ -264,7 +264,6 @@ router.delete('/api/geotags/:id', (req, res) => {
 
 router.get('/api/geotags/page/:id', (req, res) => {
   let tagStorage = GeoTagStore.getInstance();
-  
   let searchterm = req.query.searchterm
   let geotags = []
   if (searchterm == "undefined") { 
@@ -272,7 +271,6 @@ router.get('/api/geotags/page/:id', (req, res) => {
   } else {
     geotags = tagStorage.searchGeoTags(searchterm);
   }
-
   res.json(JSON.stringify(Paging.getPage(geotags, req.params.id-1)));
 });
 
