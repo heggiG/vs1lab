@@ -155,8 +155,9 @@ router.get('/api/geotags', (req, res) => {
             tempTagList = tagStorage.getAllGeoTags();
         }
     }
+    console.log(tempTagList)
 
-    res.json(tempTagList);
+    res.json(Paging.getPage(tempTagList, 0));
 });
 
 
