@@ -119,8 +119,6 @@ router.post('/discovery', (req, res) => {
  * If 'searchterm' is present, it will be filtered by search term. "query" not "searchterm"
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
-
-
 router.get('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = [];
@@ -161,9 +159,6 @@ router.get('/api/geotags', (req, res) => {
  * The URL of the new resource is returned in the header as a response.
  * The new resource is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
-
 router.post('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let simpleGeoTag = req.body;
@@ -190,9 +185,6 @@ router.post('/api/geotags', (req, res) => {
  *
  * The requested tag is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
-
 router.get('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let requestedGeoTag = tagStorage.getGeoTagById(req.params.id); //ID!
@@ -212,9 +204,6 @@ router.get('/api/geotags/:id', (req, res) => {
  * Changes the tag with the corresponding ID to the sent value.
  * The updated resource is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
-
 router.put('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     tagStorage.removeGeoTagById(req.params.id);
@@ -239,9 +228,6 @@ router.put('/api/geotags/:id', (req, res) => {
  * Deletes the tag with the corresponding ID.
  * The deleted resource is rendered as JSON in the response.
  */
-
-// TODO: ... your code here ...
-
 router.delete('/api/geotags/:id', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
 
