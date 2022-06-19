@@ -20,9 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let map = document.getElementById("img_map");
             let currentTags = JSON.parse(map.dataset.tags); //get the current tags
             currentTags.push(geotag); //add the new tag client side
-            console.log(currentTags)
 
-            let tagsArray = JSON.parse(tags);
+            let tagsArray = JSON.parse(r);
             dataElement.dataset.currentpage = 0;
            
             document.getElementById("discoveryResults").innerHTML = "";
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let entry = document.createElement("li");
                 entry.classList.add("resultListElement");
                 
-                entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
+                entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ") " + tagsArray[index].tag
                 
                 document.getElementById("discoveryResults").appendChild(entry);
             }
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
                     
-                    entry.innerHTML = tags[index].name +" (" + tags[index].latitude + "," + tags[index].longitude + ")" + tags[index].tag
+                    entry.innerHTML = tags[index].name +" (" + tags[index].latitude + "," + tags[index].longitude + ") " + tags[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 }
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
                     
-                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
+                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ") " + tagsArray[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 } 
