@@ -108,7 +108,7 @@ router.post('/discovery', (req, res) => {
         taglist: tempTagList,
         ejs_latitude: req.body["latitude"],
         ejs_longitude: req.body["longitude"],
-        ejs_mapTagList: JSON.stringify(tempTagList)
+        //ejs_mapTagList: JSON.stringify(tempTagList)
     });
 })
 

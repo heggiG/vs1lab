@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let tag = document.getElementById('inp_hashtag').value;
         let longitude = parseFloat(document.getElementById('inp_longitude').value);
         let latitude = parseFloat(document.getElementById('inp_latitude').value);
-        let geotag = new SimpleTag(latitude, longitude, name, tag); //new tag to send over ajax
+        let geotag = new SimpleTag(longitude, latitude, name, tag); //new tag to send over ajax
 
         fetch('/api/geotags/', { //ajax call to put new tag
             method: 'POST',
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             map.dataset.tags = JSON.stringify(currentTags); //set the new taglist
             updateLocation(); //update the map
+            updateButtons();
         }).catch(e => console.error(e))
 
     }, true);
@@ -56,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(tags => {
                 document.getElementById("discoveryResults").innerHTML = "";
 
-                dataElement.dataset.currentpage = 1;
                                
                 for (let index = 0; index < tags.length; index++) {
                     let entry = document.createElement("li");
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let imgMap = document.getElementById("img_map");
                 imgMap.dataset.tags = JSON.stringify(tags);
                 updateLocation();
+                updateButtons();
         }).catch(e => console.error(e))
 
     }, true);
@@ -146,12 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
     })
-
-
     updateButtons();
 });
 
-async function updateButtons(){
+function updateButtons(){
     let dataElement = document.getElementById("dataElement");
     if (dataElement.dataset["currentpage"] == 1) {
         document.getElementById("btn_previousPage").disabled = true;
