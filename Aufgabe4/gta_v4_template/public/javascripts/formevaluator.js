@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(r => {
             let map = document.getElementById("img_map");
             let currentTags = JSON.parse(map.dataset.tags); //get the current tags
-            currentTags.push(geotag); //add the new tag client side
-
-            dataElement.dataset.currentpage = 0;
+            if (dataElement.dataset.currentpage == dataElement.dataset.lastpage) {
+                currentTags.push(geotag); //add the new tag client side
+            }
 
             document.getElementById("discoveryResults").innerHTML = "";
             
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("discoveryResults").appendChild(entry);
             }
             
-            dataElement.dataset["numberofentries"] = Number(dataElement.dataset["numberofentries"]) + 1
+            dataElement.dataset["numberofentries"] = (Number(dataElement.dataset["numberofentries"]) + 1).toString()
             document.getElementById("lbl_numberOfEntries").value = dataElement.dataset["numberofentries"]
             
             map.dataset.tags = JSON.stringify(currentTags); //set the new taglist
@@ -66,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 }
-                
-                dataElement.dataset["currentpage"] = 1;
+
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
 
                 let imgMap = document.getElementById("img_map");
@@ -87,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) -1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'cache-control': 'no-cache',
                 }
             }).then(r => r.json()).then(tagsArray => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) - 1;
@@ -118,9 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] < dataElement.dataset["lastpage"]) {
             fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
-                mehod: 'GET',
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'cache-control': 'no-cache',
                 }
             }).then(r => r.json()).then(tagsArray => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateButtons();
 });
 
-function updateButtons(){
+async function updateButtons(){
     let dataElement = document.getElementById("dataElement");
     if (dataElement.dataset["currentpage"] == 1) {
         document.getElementById("btn_previousPage").disabled = true;
@@ -173,7 +174,7 @@ class SimpleTag {
     longitude
     latitude
 
-    constructor(longitude, latitude, name, tag) {
+    constructor(latitude, longitude, name, tag) {
         this.name = name;
         this.tag = tag;
         this.longitude = longitude;
