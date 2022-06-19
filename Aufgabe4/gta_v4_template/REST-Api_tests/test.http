@@ -62,14 +62,14 @@
 # }
 
 # Suchen:
-GET http://localhost:3000/api/geotags/"query"="DochWoAnders" HTTP/1.1
-content-type: ??
-
-{
-    latitude: 50.2,
-    longitude: 9.1,
-    query: "DochWoAnders"
-}
+#GET http://localhost:3000/api/geotags/"query"="DochWoAnders" HTTP/1.1
+#content-type: ??
+#
+#{
+#    latitude: 50.2,
+#    longitude: 9.1,
+#    query: "DochWoAnders"
+#}
 
 # Löschen:
 # DELETE http:localhost:3000/api/geotags/11 HTTP/1.1
