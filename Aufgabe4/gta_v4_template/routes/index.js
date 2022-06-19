@@ -31,6 +31,8 @@ const InMemoryGeoTagStore = require('../models/geotag-store');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const Paging = require('../models/paging-utils');
+
 // App routes (A3)
 
 /**
@@ -43,13 +45,18 @@ const GeoTagStore = require('../models/geotag-store');
  */
 
 router.get('/', (req, res) => {
+    let val_latitude = (req.body["latitude"] != undefined) ? req.body["latitude"] : "-49.01508"
+    let val_longitude = (req.body["longitude"] != undefined) ? req.body["longitude"] : "-8.39007"
     let getTagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = getTagStorage.getAllGeoTags();
     res.render('index', {
-        taglist: tempTagList,
-        ejs_latitude: "-49.01508",
-        ejs_longitude: "-8.39007",
-        ejs_mapTagList: JSON.stringify(tempTagList)
+        taglist: Paging.getPage(tempTagList, 0),
+        ejs_latitude: val_latitude,
+        ejs_longitude: val_longitude,
+        ejs_currentPageNumber: 1,
+        ejs_maxPageNumber: Math.ceil(tempTagList.length/Paging.getPageSize()),
+        ejs_mapTagList: JSON.stringify(Paging.getPage(tempTagList, 0)),
+        ejs_numberOfEntries: tempTagList.length
     });
 });
 
@@ -130,20 +137,23 @@ router.get('/api/geotags', (req, res) => {
         radius = query["radius"];
     }
     if (query["latitude"] >= 0 && query["longitude"] >= 0) {
-        if(query["searchterm"] !== undefined) {
-            tempTagList = tagStorage.searchNearbyGeoTags(query["latitude"], query["longitude"], radius, query["searchterm"]);
+        if(query["query"] != undefined) {
+        //if(query["searchterm"] !== undefined) {
+            tempTagList = tagStorage.searchNearbyGeoTags(query["latitude"], query["longitude"], radius, query["query"]);
         } else {
             tempTagList = tagStorage.getNearbyGeoTags(query["latitude"], query["longitude"], radius);
         }
     } else {
-        if(query["searchterm"] !== undefined) {
-            tempTagList = tagStorage.searchGeoTags(query["searchterm"]);
+        if(query["query"] != undefined) {
+        ///if(query["searchterm"] !== undefined) {
+            tempTagList = tagStorage.searchGeoTags(query["query"]);
         } else {
             tempTagList = tagStorage.getAllGeoTags();
         }
     }
+    console.log(tempTagList)
 
-    res.json(tempTagList);
+    res.json(Paging.getPage(tempTagList, 0));
 });
 
 
@@ -235,5 +245,18 @@ router.delete('/api/geotags/:id', (req, res) => {
 
     res.json(deletedGeoTag);
 })
+
+
+router.get('/api/geotags/page/:id', (req, res) => {
+  let tagStorage = GeoTagStore.getInstance();
+  let searchterm = req.query.searchterm
+  let geotags = []
+  if (searchterm == undefined) { 
+    geotags = tagStorage.getAllGeoTags(); //ID!
+  } else {
+    geotags = tagStorage.searchGeoTags(searchterm);
+  }
+  res.json(Paging.getPage(geotags, req.params.id-1));
+});
 
 module.exports = router;

@@ -1,7 +1,16 @@
 // File origin: VS1LAB A3
 
+<<<<<<< HEAD
+const GeoTag = require("./geotag");
+
+/**
+ * This script is a template for exercise VS1lab/Aufgabe3
+ * Complete all TODOs in the code documentation.
+ */
+=======
 
 const GeoTag = require("./geotag");
+>>>>>>> origin/dev
 
 /**
  * A class representing example geoTags at HKA
@@ -27,6 +36,18 @@ class GeoTagExamples {
             new GeoTag('Building B', 49.016843, 8.391372, '#campus'),
             new GeoTag('Building K', 49.013190, 8.392090, '#campus'),
         ];
+    }
+
+    /**
+     * @returns {GeoTag[]}
+     */
+    static get geoTagList() {
+        let temp = [];
+        this.tagList.forEach(it => {
+            let tag = new GeoTag(it[1], it[2], it[0], it[3]);
+            temp.push(tag);
+        });
+        return temp;
     }
 }
 

@@ -41,7 +41,12 @@ app.use(express.urlencoded({ extended: false }));
  */
 
 // TODO: ... your code here ...
+<<<<<<< HEAD
+app.use(express.static(__dirname + "/public"))
+
+=======
 app.use(express.static(path.join(__dirname, 'public')));
+>>>>>>> origin/dev
 // Set dedicated script for routing
 app.use('/', indexRouter);
 

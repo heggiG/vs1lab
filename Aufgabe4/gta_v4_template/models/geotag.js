@@ -15,7 +15,7 @@ let tagId = 0;
 
 
 class GeoTag {
-    gtId = 0;
+    id = 0;
     latitude = 0;
     longitude = 0;
     /**
@@ -30,13 +30,17 @@ class GeoTag {
 
 
     // TODO: ... your code here ...
-    constructor(latitude, longitude, name, tag) {
+    constructor(latitude, longitude, name, tag, id) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.tag = tag;
 
-        this.gtId = tagId++;
+        if (id < 0) {
+            this.gtId = tagId++;
+        } else {
+            this.id = tagId++;
+        }
         return this;
     }
 
@@ -58,7 +62,7 @@ class GeoTag {
     }
 
     get gtId() {
-        return this.gtId;
+        return this.id;
     }
 }
 

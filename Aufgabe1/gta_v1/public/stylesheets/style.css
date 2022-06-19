@@ -225,6 +225,7 @@ ul.discovery__results li {
 
 img#mapView {
   display: block;
+  width: 100%;
 }
 /* ... your code here ... */
 

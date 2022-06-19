@@ -83,10 +83,19 @@
                     <ul class="discovery__results" id="discoveryResults">
                         <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
                             <li class="resultListElement"><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.tag %> </li>
-                            <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.tag %> </li>
                         <% }); %>
                     </ul>
+                    
+                    <div class="dataElement" id="dataElement" data-currentPage="<%= ejs_currentPageNumber %>" data-lastPage="<%= ejs_maxPageNumber %>" data-numberOfTags="<%= ejs_numberOfEntries %>">
+                        <button id="btn_previousPage">&lt;</button>
+                        <label id="lbl_currentPageNumber"> <%= ejs_currentPageNumber %> </label>  
+                        <label> / </label> 
+                        <label id="lbl_maxPageNumber"><%= ejs_maxPageNumber %></label> 
+                        <label id="lbl_numberOfEntries">(<%= ejs_numberOfEntries %>)</label>
+                        <button id="btn_nextPage">&gt;</button>
+                    </div>
                 </div>
+                
 
                 <div class="discovery__map col-9">
                     <img id="img_map" src="./images/mapview.jpg" data-tags="<%= ejs_mapTagList %>" alt="a map with locations" />
