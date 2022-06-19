@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("discoveryFilterForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        let term = document.getElementById('inp_searchterm').toString();
-        fetch(`/api/geotags/?query=${term}`, {
+        let term = document.getElementById('inp_searchterm').value;
+        fetch(`/api/geotags/?searchterm=${term}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain',
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(r => r.json())
             .then(tags => {
             let imgMap = document.getElementById("img_map");
+            console.log(tags)
             imgMap.dataset.tags = JSON.stringify(tags);
             updateLocation();
         }).catch(e => console.error(e))

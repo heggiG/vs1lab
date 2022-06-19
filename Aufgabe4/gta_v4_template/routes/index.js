@@ -116,16 +116,15 @@ router.post('/discovery', (req, res) => {
  * (http://expressjs.com/de/4x/api.html#req.body)
  *
  * As a response, an array with Geo Tag objects is rendered as JSON.
- * If 'searchterm' is present, it will be filtered by search term. "query" not "searchterm"
+ * If 'searchterm' is present, it will be filtered by search term.
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
 router.get('/api/geotags', (req, res) => {
     let tagStorage = InMemoryGeoTagStore.getInstance();
     let tempTagList = [];
     let query = url.parse(req.url, true).query;
-    console.log(query["latitude"]);
     let radius = -1;
-    if(query["radius"] === undefined) {
+    if(query["radius"] == undefined) {
         radius = 5;
     } else {
         radius = query["radius"];
