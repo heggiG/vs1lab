@@ -21,6 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentTags = JSON.parse(map.dataset.tags); //get the current tags
             currentTags.push(geotag); //add the new tag client side
             console.log(currentTags)
+
+            let tagsArray = JSON.parse(tags);
+            dataElement.dataset.currentpage = 0;
+           
+            document.getElementById("discoveryResults").innerHTML = "";
+            
+            for (let index = 0; index < tagsArray.length; index++) {
+                let entry = document.createElement("li");
+                entry.classList.add("resultListElement");
+                
+                entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
+                
+                document.getElementById("discoveryResults").appendChild(entry);
+            }
+            
+            dataElement.dataset["currentpage"] = Number(dataElement.dataset["currentpage"]);
+            document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
+            dataElement.dataset["numberofentries"] = Number(dataElement.dataset["numberofentries"])
+            
             map.dataset.tags = JSON.stringify(currentTags); //set the new taglist
             updateLocation(); //update the map
         }).catch(e => console.error(e))
@@ -37,6 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         }).then(r => r.json())
             .then(tags => {
+                document.getElementById("discoveryResults").innerHTML = "";
+
+                dataElement.dataset.currentpage = 1;
+               
+                console.log(document.getElementById("discoveryResults"))
+                
+                for (let index = 0; index < tags.length; index++) {
+                    let entry = document.createElement("li");
+                    entry.classList.add("resultListElement");
+                    
+                    entry.innerHTML = tags[index].name +" (" + tags[index].latitude + "," + tags[index].longitude + ")" + tags[index].tag
+                    
+                    document.getElementById("discoveryResults").appendChild(entry);
+                }
+                
+                dataElement.dataset["currentpage"] = Number(dataElement.dataset["currentpage"]);
+                document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
             let imgMap = document.getElementById("img_map");
             imgMap.dataset.tags = JSON.stringify(tags);
             updateLocation();
@@ -52,15 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] > 1) {
             fetch("/api/geotags/page/" + (Number(dataElement.dataset.currentpage) - 1), {
-                mehod: 'GET',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(r => r.json()).then(tags => {
                 let tagsArray = JSON.parse(tags);
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) - 1;
-                let listEntries = document.getElementsByClassName("resultListElement")
-
+                
                 document.getElementById("discoveryResults").innerHTML = "";
 
                 for (let index = 0; index < tagsArray.length; index++) {
@@ -70,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
-                    //listEntries[index].innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].hashtag
-                }
+                } 
+                
                 dataElement.dataset["currentpage"] = Number(dataElement.dataset["currentpage"]);
                 document.getElementById("lbl_currentPageNumber").innerHTML = dataElement.dataset["currentpage"];
 
@@ -102,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
                     
-                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ")" + tagsArray[index].tag
+                    entry.innerHTML = tagsArray[index].name +" (" + tagsArray[index].latitude + "," + tagsArray[index].longitude + ") " + tagsArray[index].tag
                     
                     document.getElementById("discoveryResults").appendChild(entry);
                 }
