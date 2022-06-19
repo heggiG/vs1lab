@@ -46,7 +46,6 @@ function updateLocation() {
         
         let tagString = img_map.dataset.tags
         let tagList = JSON.parse(tagString)
-        
         let mapManager = new MapManager('N4mhgGoSOglrbWwQ6qOicG08hP8baOVd');
         img_map.src = mapManager.getMapUrl(tagList[0].latitude, tagList[0].longitude, tagList)
     }
