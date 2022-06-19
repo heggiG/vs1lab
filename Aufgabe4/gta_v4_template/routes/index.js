@@ -10,7 +10,7 @@
  * Define module dependencies.
  */
 
-const { application, json } = require('express');
+const {application, json} = require('express');
 const express = require('express');
 const router = express.Router();
 const url = require("url");
@@ -54,7 +54,7 @@ router.get('/', (req, res) => {
         ejs_latitude: val_latitude,
         ejs_longitude: val_longitude,
         ejs_currentPageNumber: 1,
-        ejs_maxPageNumber: Math.ceil(tempTagList.length/Paging.getPageSize()),
+        ejs_maxPageNumber: Math.ceil(tempTagList.length / Paging.getPageSize()),
         ejs_mapTagList: JSON.stringify(Paging.getPage(tempTagList, 0)),
         ejs_numberOfEntries: tempTagList.length
     });
@@ -135,21 +135,21 @@ router.get('/api/geotags', (req, res) => {
     let tempTagList = [];
     let query = url.parse(req.url, true).query;
     let radius = -1;
-    if(query["radius"] == undefined) {
+    if (query["radius"] == undefined) {
         radius = 5;
     } else {
         radius = query["radius"];
     }
     if (query["latitude"] >= 0 && query["longitude"] >= 0) {
-        if(query["query"] != undefined) {
-        //if(query["searchterm"] !== undefined) {
+        if (query["query"] != undefined) {
+            //if(query["searchterm"] !== undefined) {
             tempTagList = tagStorage.searchNearbyGeoTags(query["latitude"], query["longitude"], radius, query["query"]);
         } else {
             tempTagList = tagStorage.getNearbyGeoTags(query["latitude"], query["longitude"], radius);
         }
     } else {
-        if(query["query"] != undefined) {
-        ///if(query["searchterm"] !== undefined) {
+        if (query["query"] != undefined) {
+            ///if(query["searchterm"] !== undefined) {
             tempTagList = tagStorage.searchGeoTags(query["query"]);
         } else {
             tempTagList = tagStorage.getAllGeoTags();
@@ -159,7 +159,6 @@ router.get('/api/geotags', (req, res) => {
 
     res.json(Paging.getPage(tempTagList, 0));
 });
-
 
 
 /**
@@ -184,7 +183,7 @@ router.post('/api/geotags', (req, res) => {
     let tag = simpleGeoTag.tag;
     let newGeoTag = new GeoTag(latitude, longitude, name, tag);
     tagStorage.addGeoTag(newGeoTag);
-    let url ='/api/geotags/' + newGeoTag.gtId;
+    let url = '/api/geotags/' + newGeoTag.gtId;
     res.location(url);
     console.log('newGeoTag.gtId' + newGeoTag.gtId);
     console.log('url' + url);
@@ -263,15 +262,15 @@ router.delete('/api/geotags/:id', (req, res) => {
 
 
 router.get('/api/geotags/page/:id', (req, res) => {
-  let tagStorage = GeoTagStore.getInstance();
-  let searchterm = req.query.searchterm
-  let geotags = []
-  if (searchterm == undefined) { 
-    geotags = tagStorage.getAllGeoTags(); //ID!
-  } else {
-    geotags = tagStorage.searchGeoTags(searchterm);
-  }
-  res.json(Paging.getPage(geotags, req.params.id-1));
+    let tagStorage = GeoTagStore.getInstance();
+    let searchterm = req.query.searchterm
+    let geotags = []
+    if (searchterm == undefined) {
+        geotags = tagStorage.getAllGeoTags(); //ID!
+    } else {
+        geotags = tagStorage.searchGeoTags(searchterm);
+    }
+    res.json(Paging.getPage(geotags, req.params.id - 1));
 });
 
 module.exports = router;

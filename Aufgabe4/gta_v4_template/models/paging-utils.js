@@ -3,7 +3,7 @@ const GeoTag = require("./geotag");
 class Paging{
     static PAGE_SIZE = 5.0
 
-    static getPageSize(){
+    static getPageSize() {
         return Paging.PAGE_SIZE;
     }
 
