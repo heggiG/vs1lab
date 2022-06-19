@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("btn_previousPage").addEventListener("click", (event) => {
         let dataElement = document.getElementById("dataElement")
         if(dataElement.dataset["currentpage"] > 1) {
-            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) +1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
+            fetch(`/api/geotags/page/${(Number(dataElement.dataset.currentpage) -1)}?searchterm=${document.getElementById("inp_searchterm").value}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) - 1;
                 
                 document.getElementById("discoveryResults").innerHTML = "";
-
                 for (let index = 0; index < tagsArray.length; index++) {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
@@ -131,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dataElement.dataset.currentpage = Number(dataElement.dataset.currentpage) + 1;
                
                 document.getElementById("discoveryResults").innerHTML = "";
-                
+                console.log(tagsArray)
                 for (let index = 0; index < tagsArray.length; index++) {
                     let entry = document.createElement("li");
                     entry.classList.add("resultListElement");
