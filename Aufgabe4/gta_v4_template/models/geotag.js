@@ -62,7 +62,7 @@ class GeoTag {
     }
 
     get gtId() {
-        return this.gtId;
+        return this.id;
     }
 }
 
